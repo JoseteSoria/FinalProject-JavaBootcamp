@@ -44,7 +44,7 @@ public class UserService {
         }
 
         LOGGER.info("POST request to create a new user");
-        User user = userRepository.save(new User(userDTO.getUsername(), userDTO.getName(),
+        User user = userRepository.save(new User(userDTO.getName(), userDTO.getUsername(),
                 passwordEncoder.encode(userDTO.getPassword()), userDTO.getRole()));
 
         LOGGER.info("User created: " + user);
