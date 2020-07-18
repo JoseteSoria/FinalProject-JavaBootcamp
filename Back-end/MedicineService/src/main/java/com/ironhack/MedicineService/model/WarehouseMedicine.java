@@ -9,6 +9,7 @@ import java.util.Calendar;
 @Table(name = "warehouse_medicine")
 public class WarehouseMedicine extends Medicine {
     private Integer quantity;
+    @Temporal(TemporalType.DATE)
     private Calendar expirationDate;
     @Embedded
     @AttributeOverrides({
