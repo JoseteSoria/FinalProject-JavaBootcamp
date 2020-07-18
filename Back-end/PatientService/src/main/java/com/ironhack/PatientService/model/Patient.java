@@ -1,0 +1,57 @@
+package com.ironhack.PatientService.model;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Calendar;
+
+@Entity
+public class Patient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @NotBlank(message = "Name can not be empty")
+    private String name;
+    @Temporal(TemporalType.DATE)
+    private Calendar birthday;
+    private String phoneNumber;
+
+    public Patient(){}
+
+    public Patient(String name, Calendar birthday, String phoneNumber) {
+        this.name = name;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Calendar getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Calendar birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+}
