@@ -15,12 +15,13 @@ public class Patient {
     private Calendar birthday;
     private String phoneNumber;
 
-    public Patient(){}
+    public Patient() {
+    }
 
     public Patient(String name, Calendar birthday, String phoneNumber) {
         this.name = name;
         this.birthday = birthday;
-        this.phoneNumber = phoneNumber;
+        setPhoneNumber(phoneNumber);
     }
 
     public Integer getId() {
@@ -52,6 +53,6 @@ public class Patient {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = (phoneNumber != null) ? phoneNumber : "000000000";
     }
 }

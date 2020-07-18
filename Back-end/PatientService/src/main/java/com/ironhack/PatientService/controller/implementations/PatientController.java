@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class PatientController implements IPatientController {
 
     @PostMapping("/patients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Patient create (@RequestBody Patient patient){
+    public Patient create (@RequestBody @Valid Patient patient){
         return patientService.store(patient);
     }
 
