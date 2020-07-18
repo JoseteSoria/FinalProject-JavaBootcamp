@@ -7,7 +7,7 @@ import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name = "medicines_ordered")
-public class MedicinesOrdered {
+public class MedicineOrdered {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,10 +18,10 @@ public class MedicinesOrdered {
     @Positive(message = "Quantity has to be a positive integer")
     private Integer quantity;
 
-    public MedicinesOrdered() {
+    public MedicineOrdered() {
     }
 
-    public MedicinesOrdered(Long orderId, Long medicineId, Integer quantity) {
+    public MedicineOrdered(Long orderId, Long medicineId, Integer quantity) {
         this.orderId = orderId;
         this.medicineId = medicineId;
         this.quantity = quantity;
