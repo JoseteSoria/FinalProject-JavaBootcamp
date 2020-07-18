@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironhack.MedicineService.classes.Money;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.service.WarehouseMedicineService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,7 +49,8 @@ class WarehouseMedicineControllerTest {
         List<WarehouseMedicine> warehouseMedicines = Arrays.asList(warehouseMedicine, warehouseMedicine2);
         when(warehouseMedicineService.findAll()).thenReturn(warehouseMedicines);
         when(warehouseMedicineService.findById(warehouseMedicine.getId())).thenReturn(warehouseMedicine);
-        when(warehouseMedicineService.findByName("Ibuprofeno")).thenReturn(Optional.of(warehouseMedicine));
+        WarehouseMedicineQuantityVM vm = new WarehouseMedicineQuantityVM("Ibuprofeno", 1);
+        when(warehouseMedicineService.findByName("Ibuprofeno")).thenReturn(Optional.of(vm));
         doAnswer(i -> {return null;}).when(warehouseMedicineService).addQuantity(warehouseMedicine.getId(),5);
         doAnswer(i -> {return null;}).when(warehouseMedicineService).reduceQuantity(warehouseMedicine.getId(),5);
         doAnswer(i -> {return null;}).when(warehouseMedicineService).updatePrice(warehouseMedicine.getId(),new BigDecimal("10"));

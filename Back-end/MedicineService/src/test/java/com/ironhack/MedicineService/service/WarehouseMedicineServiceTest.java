@@ -6,6 +6,7 @@ import com.ironhack.MedicineService.exceptions.IllegalInputException;
 import com.ironhack.MedicineService.exceptions.ResourceNotFoundException;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.repository.MedicineRepository;
 import com.ironhack.MedicineService.repository.WarehouseMedicineRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,8 +60,12 @@ class WarehouseMedicineServiceTest {
         List<WarehouseMedicine> warehouseMedicines = Arrays.asList(warehouseMedicine, warehouseMedicine2);
         when(warehouseMedicineRepository.findAll()).thenReturn(warehouseMedicines);
         when(warehouseMedicineRepository.findById(warehouseMedicine.getId())).thenReturn(Optional.of(warehouseMedicine));
-        when(warehouseMedicineRepository.findByName("Ibuprofeno")).thenReturn(Optional.of(warehouseMedicine));
+        WarehouseMedicineQuantityVM vm = new WarehouseMedicineQuantityVM("Ibuprofeno", 1);
+        WarehouseMedicineQuantityVM [] vms = new WarehouseMedicineQuantityVM[1];
+        vms[0] = vm;
+        when(warehouseMedicineRepository.findMedicinesByName("Ibuprofeno")).thenReturn(Optional.of(vms));
         when(medicineRepository.findById(1l)).thenReturn(Optional.of(medicine));
+        when(medicineRepository.findById(2l)).thenReturn(Optional.empty());
         Medicine medicine2 = new Medicine("Paracetamol", 20, true, new Money(new BigDecimal("3.85")));
         when(medicineRepository.findById(2l)).thenReturn(Optional.of(medicine2));
         doAnswer(i -> {return null;}).when(warehouseMedicineRepository).save(warehouseMedicine);
@@ -89,7 +94,7 @@ class WarehouseMedicineServiceTest {
 
     @Test
     @DisplayName("Unit test - retrieval of a warehouse-medicine by name")
-    void findByUsername() {
+    void findByName() {
         assertEquals("Ibuprofeno", warehouseMedicineService.findByName("Ibuprofeno").get().getName());
     }
 

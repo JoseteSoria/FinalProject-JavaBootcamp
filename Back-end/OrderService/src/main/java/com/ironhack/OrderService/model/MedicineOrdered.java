@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
-@Table(name = "medicines_ordered")
+@Table(name = "medicine_ordered")
 public class MedicineOrdered {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

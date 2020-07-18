@@ -1,6 +1,7 @@
 package com.ironhack.MedicineService.controller.interfaces;
 
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public interface IWarehouseMedicineController {
 
     public WarehouseMedicine findById(Long id);
 
-    public Optional<WarehouseMedicine> findByUsername(String name);
+    public Optional<WarehouseMedicineQuantityVM> findByName(String name);
 
     public void addQuantity(Long id, Integer quantity);
 

@@ -2,6 +2,7 @@ package com.ironhack.MedicineService.controller.implementations;
 
 import com.ironhack.MedicineService.controller.interfaces.IWarehouseMedicineController;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.service.WarehouseMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class WarehouseMedicineController implements IWarehouseMedicineController
 
     @GetMapping( "/warehouse-medicines/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<WarehouseMedicine> findByUsername(@PathVariable(name = "name") String name) {
+    public Optional<WarehouseMedicineQuantityVM> findByName(@PathVariable(name = "name") String name) {
         return warehouseMedicineService.findByName(name);
     }
 

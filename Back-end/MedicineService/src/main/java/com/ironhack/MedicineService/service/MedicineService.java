@@ -19,7 +19,7 @@ public class MedicineService {
     }
 
     public Medicine findById(Long id){
-        return medicineRepository.findById(id).orElseThrow(
+        return medicineRepository.findMedicineById(id).orElseThrow(
                 ()->new ResourceNotFoundException("Medicine not found with that id"));
     }
 

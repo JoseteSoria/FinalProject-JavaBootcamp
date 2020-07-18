@@ -5,6 +5,7 @@ import com.ironhack.MedicineService.exceptions.IllegalInputException;
 import com.ironhack.MedicineService.exceptions.ResourceNotFoundException;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.repository.MedicineRepository;
 import com.ironhack.MedicineService.repository.WarehouseMedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class WarehouseMedicineService {
     public WarehouseMedicine newStore(Long medicineId){
         Medicine medicine = medicineRepository.findById(medicineId).orElseThrow(
                 ()->new ResourceNotFoundException("Medicine not found with that id"));
-        Optional<WarehouseMedicine> warehouseMedicine = findByName(medicine.getName());
+        Optional<WarehouseMedicineQuantityVM> warehouseMedicine = findByName(medicine.getName());
         if(!warehouseMedicine.isEmpty()){
             throw new IllegalInputException("That medicine is already in our database");
         }
@@ -71,7 +72,14 @@ public class WarehouseMedicineService {
         warehouseMedicineRepository.delete(warehouseMedicine);
     }
 
-    public Optional<WarehouseMedicine> findByName(String name){
-        return warehouseMedicineRepository.findByName(name);
+    public Optional<WarehouseMedicineQuantityVM> findByName(String name) {
+        Optional<Object[]> obj = warehouseMedicineRepository.findMedicinesByName(name);
+        if (!obj.isEmpty()) {
+            WarehouseMedicineQuantityVM vm = (WarehouseMedicineQuantityVM) (obj.get()[0]);
+            return Optional.of(new WarehouseMedicineQuantityVM(vm.getName(), vm.getQuantity()));
+        }
+        else{
+            return Optional.empty();
+        }
     }
 }
