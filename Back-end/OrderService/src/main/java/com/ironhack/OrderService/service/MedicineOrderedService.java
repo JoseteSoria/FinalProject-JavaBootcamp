@@ -37,5 +37,4 @@ public class MedicineOrderedService {
     public List<MedicineOrdered> storeMedicines(List<MedicineOrdered> medicines) {
         return medicineOrderedRepository.saveAll(medicines);
     }
-
 }
