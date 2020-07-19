@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
     private UserClient userClient;
 
     @HystrixCommand(fallbackMethod = "errorGetAll")
-    public List<UserVM> getAll(){
+    public List<UserVM> getAll() {
         LOGGER.info("GET request to retrieve every user");
         return userClient.getAll();
     }
@@ -37,23 +37,23 @@ public class UserService implements UserDetailsService {
     }
 
     @HystrixCommand(fallbackMethod = "errorGetById")
-    public UserVM getById(Integer id){
+    public UserVM getById(Integer id) {
         LOGGER.info("GET request to retrieve user with id " + id);
         return userClient.getById(id);
     }
 
     public UserVM errorGetById(Integer id) {
-        LOGGER.error("Controlled exception - fail in GET request to retrieve the user with id " +id);
+        LOGGER.error("Controlled exception - fail in GET request to retrieve the user with id " + id);
         throw new UserServiceDownException("User Service Down. Method getById. ");
     }
 
     @HystrixCommand(fallbackMethod = "errorCreate", ignoreExceptions = {RuntimeException.class})
-    public UserVM create(UserDTO newUser){
+    public UserVM create(UserDTO newUser) {
         LOGGER.info("POST request to create a new user");
         return userClient.create(newUser);
     }
 
-    public UserVM errorCreate(UserDTO newUser){
+    public UserVM errorCreate(UserDTO newUser) {
         LOGGER.error("Controlled exception - fail in POST request to create a new user. ");
         throw new UserServiceDownException("User Service Down. Method create. ");
     }
@@ -74,12 +74,11 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         LOGGER.info("Load user by username " + username);
         Optional<User> user = userClient.findByUsername(username);
-        System.out.println("Usuario buscado");
         return new CustomSecurityUser(user.orElseThrow(() ->
                 new UsernameNotFoundException("Invalid username/password combination.")));
     }
 
-    public UserDetails errorLoadUserByUsername(String username){
+    public UserDetails errorLoadUserByUsername(String username) {
         LOGGER.error("Controlled exception - Fail in Authorization to find user (salesRep) with name " + username);
         throw new UserServiceDownException("User Service Down. Method loadUserByUsername. ");
     }

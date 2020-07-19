@@ -1,6 +1,5 @@
 package com.ironhack.PharmacyEdge.security;
 
-
 import com.ironhack.PharmacyEdge.enums.Role;
 import com.ironhack.PharmacyEdge.model.user.User;
 import org.springframework.security.core.Authentication;
@@ -22,15 +21,10 @@ public class CustomSecurityUser extends User implements UserDetails, Authenticat
         this.setUsername(user.getUsername());
         this.setPassword(user.getPassword());
         this.role = user.getRole();
-        System.out.println(this.getId());
-        System.out.println("Creando Usuario");
-
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        System.out.println("Asignando Role");
-        System.out.println(this.role.name());
         return Stream.of(new SimpleGrantedAuthority(role.toString())).collect(Collectors.toList());
     }
 
