@@ -10,16 +10,6 @@ import java.io.IOException;
 
 @ControllerAdvice
 public class GlobalHandler {
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public void handleResourceNotFoundException(ResourceNotFoundException e, HttpServletResponse response) throws IOException {
-        response.sendError(HttpServletResponse.SC_NOT_FOUND, e.getMessage());
-    }
-
-    @ExceptionHandler(IllegalInputException.class)
-    public void handleIllegalInputException(IllegalInputException e, HttpServletResponse response) throws IOException {
-        response.sendError(HttpServletResponse.SC_NOT_FOUND, e.getMessage());
-    }
-
     @ExceptionHandler(UserServiceDownException.class)
     public void handleUserServiceDownException(UserServiceDownException e, HttpServletResponse response) throws IOException {
         response.sendError(HttpServletResponse.SC_GONE, e.getMessage());
