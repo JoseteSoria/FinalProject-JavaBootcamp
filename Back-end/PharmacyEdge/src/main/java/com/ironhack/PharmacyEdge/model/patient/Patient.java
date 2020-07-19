@@ -1,15 +1,14 @@
-package com.ironhack.PatientService.model;
+package com.ironhack.PharmacyEdge.model.patient;
 
-import javax.persistence.*;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Calendar;
 
-@Entity
 public class Patient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotBlank(message = "Name can not be empty")
     private String name;

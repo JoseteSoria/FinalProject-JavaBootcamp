@@ -1,34 +1,27 @@
-package com.ironhack.MedicineService.model;
+package com.ironhack.PharmacyEdge.model.medicine;
 
-import com.ironhack.MedicineService.classes.Money;
 
-import javax.persistence.*;
+import com.ironhack.PharmacyEdge.classes.Money;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
-@Entity
-@Table(name = "warehouse_medicine")
 public class WarehouseMedicine {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "Name is required")
     private String name;
+    @NotNull(message = "Month Duration is required")
     private Integer monthDuration;
+    @NotNull(message = "Generic Boolean is required")
     private Boolean generic;
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "amount", column = @Column(name = "min_price")),
-            @AttributeOverride(name = "currency", column = @Column(name = "min_currency")),
-    })
+    @NotNull(message = "Minimum price is required")
     private Money minimumPrice;
+    @NotNull
     @Temporal(TemporalType.DATE)
     private Calendar expirationDate;
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "amount", column = @Column(name = "price")),
-            @AttributeOverride(name = "currency", column = @Column(name = "currency")),
-    })
+    @NotNull(message = "Price is required")
     private Money price;
 
     public WarehouseMedicine() {
@@ -43,7 +36,7 @@ public class WarehouseMedicine {
         this.price = price;
     }
 
-    public WarehouseMedicine(Medicine medicine){
+    public WarehouseMedicine(Medicine medicine) {
         this.name = medicine.getName();
         this.monthDuration = medicine.getMonthDuration();
         this.generic = medicine.getGeneric();
@@ -65,13 +58,13 @@ public class WarehouseMedicine {
     }
 
     public void setExpirationDate() {
-        if(this.getMonthDuration()<=0){
+        if (this.getMonthDuration() <= 0) {
             this.expirationDate = Calendar.getInstance();
             this.expirationDate.add(Calendar.YEAR, 10);
             return;
         }
         this.expirationDate = Calendar.getInstance();
-        expirationDate.add(Calendar.MONTH,this.getMonthDuration());
+        expirationDate.add(Calendar.MONTH, this.getMonthDuration());
     }
 
     public String getName() {

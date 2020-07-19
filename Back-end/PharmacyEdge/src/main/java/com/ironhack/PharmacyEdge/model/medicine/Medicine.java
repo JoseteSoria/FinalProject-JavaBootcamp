@@ -1,15 +1,11 @@
-package com.ironhack.MedicineService.model;
+package com.ironhack.PharmacyEdge.model.medicine;
 
-import com.ironhack.MedicineService.classes.Money;
 
-import javax.persistence.*;
+import com.ironhack.PharmacyEdge.classes.Money;
+
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "medicine")
 public class Medicine {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "Name is required")
     private String name;
@@ -17,11 +13,7 @@ public class Medicine {
     private Integer monthDuration;
     @NotNull(message = "Generic Boolean is required")
     private Boolean generic;
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "amount", column = @Column(name = "min_price")),
-            @AttributeOverride(name = "currency", column = @Column(name = "min_currency")),
-    })
+    @NotNull(message = "Minimum price is required")
     private Money minimumPrice;
 
     public Medicine(){}
