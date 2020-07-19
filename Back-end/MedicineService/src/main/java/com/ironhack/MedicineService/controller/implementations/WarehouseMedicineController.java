@@ -19,13 +19,13 @@ public class WarehouseMedicineController implements IWarehouseMedicineController
 
     @GetMapping("/warehouse-medicines")
     @ResponseStatus(HttpStatus.OK)
-    public List<WarehouseMedicine> findAll() {
+    public List<WarehouseMedicine> findAllWarehouseMedicines() {
         return warehouseMedicineService.findAll();
     }
 
     @GetMapping("/warehouse-medicines/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public WarehouseMedicine findById(@PathVariable Long id) {
+    public WarehouseMedicine findWarehouseMedicineById(@PathVariable Long id) {
         return warehouseMedicineService.findById(id);
     }
 
@@ -37,7 +37,7 @@ public class WarehouseMedicineController implements IWarehouseMedicineController
 
     @GetMapping("/warehouse-medicines/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<List<WarehouseMedicine>> findByName(@PathVariable(name = "name") String name) {
+    public Optional<List<WarehouseMedicine>> findWarehouseMedicineByName(@PathVariable(name = "name") String name) {
         return warehouseMedicineService.findByName(name);
     }
 

@@ -3,6 +3,7 @@ package com.ironhack.MedicineService.model;
 import com.ironhack.MedicineService.classes.Money;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "medicine")
@@ -10,8 +11,11 @@ public class Medicine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull(message = "Name is required")
     private String name;
+    @NotNull(message = "Month Duration is required")
     private Integer monthDuration;
+    @NotNull(message = "Generic Boolean is required")
     private Boolean generic;
     @Embedded
     @AttributeOverrides({

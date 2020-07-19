@@ -30,7 +30,7 @@ public class PatientController implements IPatientController {
 
     @GetMapping( "/patients/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Patient> findByUsername(@PathVariable(name = "name") String name) {
+    public Optional<Patient> findPatientByName(@PathVariable(name = "name") String name) {
         return patientService.findByName(name);
     }
 

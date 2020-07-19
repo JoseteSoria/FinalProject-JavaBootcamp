@@ -2,6 +2,8 @@ package com.ironhack.PatientService.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Calendar;
 
 @Entity
@@ -13,6 +15,8 @@ public class Patient {
     private String name;
     @Temporal(TemporalType.DATE)
     private Calendar birthday;
+    @NotNull
+    @Pattern(regexp = "[0-9]{9}")
     private String phoneNumber;
 
     public Patient() {

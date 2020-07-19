@@ -17,25 +17,25 @@ public class SalesController implements ISalesController {
 
     @GetMapping("/sales")
     @ResponseStatus(HttpStatus.OK)
-    public List<Sales> findAll() {
+    public List<Sales> findAllSales() {
         return salesService.findAll();
     }
 
     @GetMapping("/sales/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Sales findById(@PathVariable Long id) {
+    public Sales findSaleById(@PathVariable Long id) {
         return salesService.findById(id);
     }
 
     @GetMapping("/sales/last")
     @ResponseStatus(HttpStatus.OK)
-    public Sales findLastOrder() {
+    public Sales findLastSale() {
         return salesService.findLastSale();
     }
 
     @PostMapping("/sales")
     @ResponseStatus(HttpStatus.CREATED)
-    public Sales create(@RequestBody @Valid Sales sales) {
+    public Sales createSale(@RequestBody @Valid Sales sales) {
         return salesService.store(sales);
     }
 }

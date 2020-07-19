@@ -5,11 +5,11 @@ import com.ironhack.OrderService.model.Order;
 import java.util.List;
 
 public interface IOrderController {
-    public List<Order> findAll();
+    public List<Order> findAllOrders();
 
-    public Order findById(Long id);
+    public Order findOrderById(Long id);
 
     public Order findLastOrder();
 
-    public Order create(Order order);
+    public Order createOrder(Order order);
 }

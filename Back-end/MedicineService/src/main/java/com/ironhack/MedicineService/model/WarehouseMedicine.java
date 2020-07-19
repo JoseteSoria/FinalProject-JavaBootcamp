@@ -3,6 +3,7 @@ package com.ironhack.MedicineService.model;
 import com.ironhack.MedicineService.classes.Money;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
 @Entity
@@ -11,6 +12,7 @@ public class WarehouseMedicine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull(message = "Name is required")
     private String name;
     private Integer monthDuration;
     private Boolean generic;
