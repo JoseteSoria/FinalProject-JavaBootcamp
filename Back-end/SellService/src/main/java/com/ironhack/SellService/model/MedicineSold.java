@@ -1,26 +1,29 @@
 package com.ironhack.SellService.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class MedicineSold {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "Medicine Id can not be null")
     private Long medicineId;
+    @NotNull(message = "Name can not be null")
+    private String name;
     @NotNull(message = "Sales Id can not be null")
     private Long salesId;
-    @NotNull(message = "Quantity can not be null")
-    private Integer quantity;
 
     public MedicineSold(){}
 
-    public MedicineSold(Long medicineId, Long salesId, Integer quantity) {
+    public MedicineSold(Long medicineId, String name, Long salesId) {
         this.medicineId = medicineId;
+        this.name = name;
         this.salesId = salesId;
-        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -47,11 +50,11 @@ public class MedicineSold {
         this.salesId = salesId;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public String getName() {
+        return name;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -6,18 +6,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "medicine")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Medicine {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer monthDuration;
     private Boolean generic;
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name = "amount", column = @Column(name = "recommended_price")),
-            @AttributeOverride(name = "currency", column = @Column(name = "recommended_currency")),
+            @AttributeOverride(name = "amount", column = @Column(name = "min_price")),
+            @AttributeOverride(name = "currency", column = @Column(name = "min_currency")),
     })
     private Money minimumPrice;
 

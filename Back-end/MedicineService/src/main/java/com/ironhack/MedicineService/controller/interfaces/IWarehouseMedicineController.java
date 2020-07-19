@@ -1,8 +1,7 @@
 package com.ironhack.MedicineService.controller.interfaces;
 
 import com.ironhack.MedicineService.model.WarehouseMedicine;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,15 +13,13 @@ public interface IWarehouseMedicineController {
 
     public WarehouseMedicine findById(Long id);
 
-    public Optional<WarehouseMedicine> findByUsername(String name);
+    public Optional<WarehouseMedicineQuantityVM> findQuantityByName(String name);
 
-    public void addQuantity(Long id, Integer quantity);
+    public Optional<List<WarehouseMedicine>> findByName(String name);
 
-    public void reduceQuantity(Long id, Integer quantity);
+    public void addWarehouseMedicines(Long id, Integer quantity);
 
-    public void updatePrice(Long id, BigDecimal price);
-
-    public WarehouseMedicine createWarehouseMedicine(Long id);
+    public void updatePrice(Long id, String price);
 
     public void deleteWarehouseMedicine(Long id);
 }

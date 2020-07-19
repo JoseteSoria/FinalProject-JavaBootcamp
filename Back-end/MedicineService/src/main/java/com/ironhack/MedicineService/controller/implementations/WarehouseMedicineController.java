@@ -2,6 +2,7 @@ package com.ironhack.MedicineService.controller.implementations;
 
 import com.ironhack.MedicineService.controller.interfaces.IWarehouseMedicineController;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.service.WarehouseMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,39 +29,33 @@ public class WarehouseMedicineController implements IWarehouseMedicineController
         return warehouseMedicineService.findById(id);
     }
 
-    @GetMapping( "/warehouse-medicines/name/{name}")
+    @GetMapping("/warehouse-medicines/name/{name}/quantity")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<WarehouseMedicine> findByUsername(@PathVariable(name = "name") String name) {
+    public Optional<WarehouseMedicineQuantityVM> findQuantityByName(@PathVariable(name = "name") String name) {
+        return warehouseMedicineService.findQuantityByName(name);
+    }
+
+    @GetMapping("/warehouse-medicines/name/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<List<WarehouseMedicine>> findByName(@PathVariable(name = "name") String name) {
         return warehouseMedicineService.findByName(name);
     }
 
-    @PutMapping("/warehouse-medicines/{id}/add/{quantity}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addQuantity(@PathVariable(name = "id") Long id, @PathVariable(name = "quantity") Integer quantity){
-        warehouseMedicineService.addQuantity(id, quantity);
-    }
-
-    @PutMapping("/warehouse-medicines/{id}/reduce/{quantity}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void reduceQuantity(@PathVariable(name = "id") Long id, @PathVariable(name = "quantity") Integer quantity){
-        warehouseMedicineService.reduceQuantity(id, quantity);
+    @PostMapping("/warehouse-medicines/{id}/add/{quantity}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addWarehouseMedicines(@PathVariable(name = "id") Long id, @PathVariable(name = "quantity") Integer quantity) {
+        warehouseMedicineService.addWarehouseMedicines(id, quantity);
     }
 
     @PutMapping("/warehouse-medicines/{id}/update-price/{price}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePrice(@PathVariable(name = "id") Long id, @PathVariable(name = "price") BigDecimal price){
-        warehouseMedicineService.updatePrice(id, price);
-    }
-
-    @PostMapping("/warehouse-medicines/create/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public WarehouseMedicine createWarehouseMedicine(@PathVariable(name = "id") Long id){
-        return warehouseMedicineService.newStore(id);
+    public void updatePrice(@PathVariable(name = "id") Long id, @PathVariable(name = "price") String price) {
+        warehouseMedicineService.updatePriceByNameId(id, price);
     }
 
     @DeleteMapping("/warehouse-medicines/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteWarehouseMedicine(@PathVariable(name = "id") Long id){
+    public void deleteWarehouseMedicine(@PathVariable(name = "id") Long id) {
         warehouseMedicineService.delete(id);
     }
 }

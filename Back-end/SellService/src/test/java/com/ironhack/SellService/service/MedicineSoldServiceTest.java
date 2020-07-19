@@ -37,9 +37,9 @@ class MedicineSoldServiceTest {
 
     @BeforeEach
     void setUp() {
-        medicineSold = new MedicineSold(1l, 1l, 2);
+        medicineSold = new MedicineSold(1l, "Ibuprofeno", 1l);
         medicineSold.setId(1l);
-        medicineSold2 = new MedicineSold(2l, 1l, 1);
+        medicineSold2 = new MedicineSold(2l, "Paracetamol", 1l);
 
         List<MedicineSold> medicines = Arrays.asList(medicineSold, medicineSold2);
         when(medicineSoldRepository.findAllByOrderBySalesIdDesc()).thenReturn(medicines);
@@ -48,7 +48,7 @@ class MedicineSoldServiceTest {
         sales.setId(1l);
         when(salesRepository.findById(medicineSold.getSalesId())).thenReturn(Optional.of(sales));
         when(medicineSoldRepository.findAllBySalesIdEquals(1l)).thenReturn(medicines);
-        medicineSold3 = new MedicineSold(3l, 1l, 5);
+        medicineSold3 = new MedicineSold(3l, "Amoxicilina", 1l);
         doAnswer(i -> {
             return null;
         }).when(medicineSoldRepository).saveAll(Collections.singletonList(medicineSold3));

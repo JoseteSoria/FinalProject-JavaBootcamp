@@ -40,15 +40,15 @@ class MedicineSoldControllerTest {
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        medicineSold = new MedicineSold(1l, 1l, 2);
+        medicineSold = new MedicineSold(1l, "Ibuprofeno",1l);
         medicineSold.setId(1l);
-        MedicineSold medicineSold2 = new MedicineSold(2l, 1l, 1);
+        MedicineSold medicineSold2 = new MedicineSold(2l, "Parecetamol", 1l);
 
         List<MedicineSold> medicines = Arrays.asList(medicineSold, medicineSold2);
         when(medicineSoldService.findAll()).thenReturn(medicines);
         when(medicineSoldService.findById(medicineSold.getId())).thenReturn(medicineSold);
         when(medicineSoldService.findBySalesId(1l)).thenReturn(medicines);
-        medicineSold3 = new MedicineSold(3l, 2l, 5);
+        medicineSold3 = new MedicineSold(3l, "Amoxicilina", 2l);
         doAnswer(i -> {
             return null;
         }).when(medicineSoldService).storeMedicinesSold(Collections.singletonList(medicineSold3));

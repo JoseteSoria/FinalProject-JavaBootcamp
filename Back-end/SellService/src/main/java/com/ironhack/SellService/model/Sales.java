@@ -24,12 +24,15 @@ public class Sales {
     private Money totalPrice;
 
     public Sales() {
+        Calendar cal = Calendar.getInstance();
+        this.date = cal;
     }
 
     public Sales(Integer userId, Integer patientId, Money totalPrice) {
         this.userId = userId;
         setPatientId(patientId);
-        this.date = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
+        this.date = cal;
         this.totalPrice = totalPrice;
     }
 

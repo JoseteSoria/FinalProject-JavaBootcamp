@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironhack.MedicineService.classes.Money;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.service.WarehouseMedicineService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,17 +44,17 @@ class WarehouseMedicineControllerTest {
     void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         Medicine medicine = new Medicine("Ibuprofeno", 18, true, new Money(new BigDecimal("3.45")));
-        warehouseMedicine = new WarehouseMedicine(medicine, 10);
+        warehouseMedicine = new WarehouseMedicine(medicine);
         warehouseMedicine.setId(1l);
-        WarehouseMedicine warehouseMedicine2 = new WarehouseMedicine("Paracetamol", 20, true, new Money(new BigDecimal("3.85")), 12, new Money(new BigDecimal("3.95")));
+        WarehouseMedicine warehouseMedicine2 = new WarehouseMedicine("Paracetamol", 20, true, new Money(new BigDecimal("3.85")), new Money(new BigDecimal("3.95")));
         List<WarehouseMedicine> warehouseMedicines = Arrays.asList(warehouseMedicine, warehouseMedicine2);
         when(warehouseMedicineService.findAll()).thenReturn(warehouseMedicines);
         when(warehouseMedicineService.findById(warehouseMedicine.getId())).thenReturn(warehouseMedicine);
-        when(warehouseMedicineService.findByName("Ibuprofeno")).thenReturn(Optional.of(warehouseMedicine));
-        doAnswer(i -> {return null;}).when(warehouseMedicineService).addQuantity(warehouseMedicine.getId(),5);
-        doAnswer(i -> {return null;}).when(warehouseMedicineService).reduceQuantity(warehouseMedicine.getId(),5);
-        doAnswer(i -> {return null;}).when(warehouseMedicineService).updatePrice(warehouseMedicine.getId(),new BigDecimal("10"));
-        when(warehouseMedicineService.newStore(warehouseMedicine.getId())).thenReturn(warehouseMedicine);
+        WarehouseMedicineQuantityVM vm = new WarehouseMedicineQuantityVM("Ibuprofeno", 1);
+        when(warehouseMedicineService.findQuantityByName("Ibuprofeno")).thenReturn(Optional.of(vm));
+        when(warehouseMedicineService.findByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
+        doAnswer(i -> {return null;}).when(warehouseMedicineService).addWarehouseMedicines(warehouseMedicine.getId(),5);
+        doAnswer(i -> {return null;}).when(warehouseMedicineService).updatePriceByNameId(warehouseMedicine.getId(),"10");
         doAnswer(i -> {return null;}).when(warehouseMedicineService).delete(warehouseMedicine.getId());
     }
 
@@ -75,27 +77,21 @@ class WarehouseMedicineControllerTest {
     }
 
     @Test
-    void addQuantity() throws Exception {
-        mockMvc.perform(put("/warehouse-medicines/1/add/5"))
-                .andExpect(status().isNoContent());
+    void findQuantityByName() throws Exception {
+        mockMvc.perform(get("/warehouse-medicines/name/Ibuprofeno/quantity"))
+                .andExpect(status().isOk());
     }
 
     @Test
-    void reduceQuantity() throws Exception {
-        mockMvc.perform(put("/warehouse-medicines/1/reduce/5"))
-                .andExpect(status().isNoContent());
+    void addQuantity() throws Exception {
+        mockMvc.perform(post("/warehouse-medicines/1/add/5"))
+                .andExpect(status().isCreated());
     }
 
     @Test
     void updatePrice() throws Exception {
         mockMvc.perform(put("/warehouse-medicines/1/update-price/10"))
                 .andExpect(status().isNoContent());
-    }
-
-    @Test
-    void create() throws Exception {
-        mockMvc.perform(post("/warehouse-medicines/create/1"))
-                .andExpect(status().isCreated());
     }
 
     @Test
