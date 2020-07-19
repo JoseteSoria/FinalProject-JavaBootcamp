@@ -2,16 +2,12 @@ package com.ironhack.PharmacyEdge.service;
 
 import com.ironhack.PharmacyEdge.client.PatientClient;
 import com.ironhack.PharmacyEdge.exceptions.PatientServiceDownException;
-import com.ironhack.PharmacyEdge.exceptions.UserServiceDownException;
 import com.ironhack.PharmacyEdge.model.patient.Patient;
-import com.ironhack.PharmacyEdge.model.user.dto.UserDTO;
-import com.ironhack.PharmacyEdge.model.user.viewModel.UserVM;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,23 +31,23 @@ public class PatientService {
     }
 
     @HystrixCommand(fallbackMethod = "errorFindById")
-    public Patient findById(Integer id){
+    public Patient findById(Integer id) {
         LOGGER.info("GET request to retrieve patient with id " + id);
         return patientClient.findById(id);
     }
 
     public Patient errorFindById(Integer id) {
-        LOGGER.error("Controlled exception - fail in GET request to retrieve the patient with id " +id);
+        LOGGER.error("Controlled exception - fail in GET request to retrieve the patient with id " + id);
         throw new PatientServiceDownException("Patient Service Down. Method findById. ");
     }
 
     @HystrixCommand(fallbackMethod = "errorCreate", ignoreExceptions = {RuntimeException.class})
-    public Patient create(Patient patient){
+    public Patient create(Patient patient) {
         LOGGER.info("POST request to create a new patient");
         return patientClient.create(patient);
     }
 
-    public Patient errorCreate(Patient patient){
+    public Patient errorCreate(Patient patient) {
         LOGGER.error("Controlled exception - fail in POST request to create a new patient. ");
         throw new PatientServiceDownException("Patient Service Down. Method create. ");
     }
@@ -73,7 +69,7 @@ public class PatientService {
         return patientClient.findPatientByName(name);
     }
 
-    public Optional<Patient> errorFindPatientByName(String name){
+    public Optional<Patient> errorFindPatientByName(String name) {
         LOGGER.error("Controlled exception - Fail in Authorization to find patient with name " + name);
         throw new PatientServiceDownException("Patient Service Down. Method findPatientByName. ");
     }

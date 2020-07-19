@@ -62,7 +62,7 @@ class MedicineServiceTest {
 
     @Test
     @DisplayName("Unit test - retrieval of a medicine by name")
-    void findByUsername() {
+    void findMedicineByName() {
         assertEquals("Ibuprofeno", medicineService.findByName("Ibuprofeno").get().getName());
     }
 

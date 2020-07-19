@@ -74,15 +74,15 @@ class MedicineSoldServiceTest {
     }
 
     @Test
-    @DisplayName("Unit test - retrieval of a medicine-sold with specific orderId")
-    void findByOrderId() {
+    @DisplayName("Unit test - retrieval of a medicine-sold with specific salesId")
+    void findMedicineSoldBySalesId() {
         List<MedicineSold> medicineOrderedList = medicineSoldService.findBySalesId(medicineSold.getSalesId());
         assertEquals(2, medicineOrderedList.size());
     }
 
     @Test
-    @DisplayName("Unit test - retrieval of a medicine-sold with orderId not found")
-    void findByOrderId_OrderNotFound() {
+    @DisplayName("Unit test - retrieval of a medicine-sold with salesId not found")
+    void findBySalesId_OrderNotFound() {
         assertThrows(ResourceNotFoundException.class, () -> medicineSoldService.findBySalesId(0l));
     }
 

@@ -4,7 +4,6 @@ import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface MedicineClient {
     @GetMapping("/medicines/{id}")
     public Medicine findMedicineById(@PathVariable Long id);
 
-    @GetMapping( "/medicines/name/{name}")
+    @GetMapping("/medicines/name/{name}")
     public Optional<Medicine> findMedicineByName(@PathVariable(name = "name") String name);
 
     @GetMapping("/warehouse-medicines")
