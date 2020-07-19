@@ -5,11 +5,11 @@ import com.ironhack.SellService.model.Sales;
 import java.util.List;
 
 public interface ISalesController {
-    public List<Sales> findAll();
+    public List<Sales> findAllSales();
 
-    public Sales findById(Long id);
+    public Sales findSaleById(Long id);
 
-    public Sales findLastOrder();
+    public Sales findLastSale();
 
-    public Sales create(Sales sales);
+    public Sales createSale(Sales sales);
 }

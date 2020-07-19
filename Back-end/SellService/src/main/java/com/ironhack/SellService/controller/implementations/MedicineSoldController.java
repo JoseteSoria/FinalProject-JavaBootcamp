@@ -17,25 +17,25 @@ public class MedicineSoldController implements IMedicineSoldController {
 
     @GetMapping("/medicines-sold")
     @ResponseStatus(HttpStatus.OK)
-    public List<MedicineSold> findAll() {
+    public List<MedicineSold> findAllMedicinesSold() {
         return medicineSoldService.findAll();
     }
 
     @GetMapping("/medicines-sold/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public MedicineSold findById(@PathVariable Long id) {
+    public MedicineSold findMedicineSoldById(@PathVariable Long id) {
         return medicineSoldService.findById(id);
     }
 
     @GetMapping("/medicines-sold/sales/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<MedicineSold> findBySalesId(@PathVariable Long id) {
+    public List<MedicineSold> findMedicineSoldBySalesId(@PathVariable Long id) {
         return medicineSoldService.findBySalesId(id);
     }
 
     @PostMapping("/medicines-sold")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<MedicineSold> create(@RequestBody @Valid List<MedicineSold> medicines) {
+    public List<MedicineSold> createMedicineSold(@RequestBody @Valid List<MedicineSold> medicines) {
         return medicineSoldService.storeMedicinesSold(medicines);
     }
 }

@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface IMedicineController {
 
-    public List<Medicine> findAll();
+    public List<Medicine> findAllMedicines();
 
-    public Medicine findById(Long id);
+    public Medicine findMedicineById(Long id);
 
-    public Optional<Medicine> findByUsername(String name);
+    public Optional<Medicine> findMedicineByName(String name);
 }

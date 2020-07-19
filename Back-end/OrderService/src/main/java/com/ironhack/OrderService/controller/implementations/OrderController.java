@@ -17,13 +17,13 @@ public class OrderController implements IOrderController {
 
     @GetMapping("/orders")
     @ResponseStatus(HttpStatus.OK)
-    public List<Order> findAll() {
+    public List<Order> findAllOrders() {
         return orderService.findAll();
     }
 
     @GetMapping("/orders/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Order findById(@PathVariable Long id) {
+    public Order findOrderById(@PathVariable Long id) {
         return orderService.findById(id);
     }
 
@@ -35,7 +35,7 @@ public class OrderController implements IOrderController {
 
     @PostMapping("/orders")
     @ResponseStatus(HttpStatus.CREATED)
-    public Order create(@RequestBody @Valid Order order) {
+    public Order createOrder(@RequestBody @Valid Order order) {
         return orderService.store(order);
     }
 }

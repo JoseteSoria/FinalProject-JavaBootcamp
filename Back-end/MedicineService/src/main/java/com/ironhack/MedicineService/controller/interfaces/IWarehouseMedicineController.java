@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public interface IWarehouseMedicineController {
 
-    public List<WarehouseMedicine> findAll();
+    public List<WarehouseMedicine> findAllWarehouseMedicines();
 
-    public WarehouseMedicine findById(Long id);
+    public WarehouseMedicine findWarehouseMedicineById(Long id);
 
     public Optional<WarehouseMedicineQuantityVM> findQuantityByName(String name);
 
-    public Optional<List<WarehouseMedicine>> findByName(String name);
+    public Optional<List<WarehouseMedicine>> findWarehouseMedicineByName(String name);
 
     public void addWarehouseMedicines(Long id, Integer quantity);
 

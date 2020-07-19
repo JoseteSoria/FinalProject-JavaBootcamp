@@ -18,19 +18,19 @@ public class MedicineController implements IMedicineController {
 
     @GetMapping("/medicines")
     @ResponseStatus(HttpStatus.OK)
-    public List<Medicine> findAll() {
+    public List<Medicine> findAllMedicines() {
         return medicineService.findAll();
     }
 
     @GetMapping("/medicines/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Medicine findById(@PathVariable Long id) {
+    public Medicine findMedicineById(@PathVariable Long id) {
         return medicineService.findById(id);
     }
 
     @GetMapping( "/medicines/name/{name}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Medicine> findByUsername(@PathVariable(name = "name") String name) {
+    public Optional<Medicine> findMedicineByName(@PathVariable(name = "name") String name) {
         return medicineService.findByName(name);
     }
 }

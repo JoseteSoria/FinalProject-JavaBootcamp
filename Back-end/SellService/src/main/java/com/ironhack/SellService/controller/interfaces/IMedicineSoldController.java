@@ -5,11 +5,11 @@ import com.ironhack.SellService.model.MedicineSold;
 import java.util.List;
 
 public interface IMedicineSoldController {
-    public List<MedicineSold> findAll();
+    public List<MedicineSold> findAllMedicinesSold();
 
-    public MedicineSold findById(Long id);
+    public MedicineSold findMedicineSoldById(Long id);
 
-    public List<MedicineSold> findBySalesId(Long id);
+    public List<MedicineSold> findMedicineSoldBySalesId(Long id);
 
-    public List<MedicineSold> create(List<MedicineSold> medicines);
+    public List<MedicineSold> createMedicineSold(List<MedicineSold> medicines);
 }

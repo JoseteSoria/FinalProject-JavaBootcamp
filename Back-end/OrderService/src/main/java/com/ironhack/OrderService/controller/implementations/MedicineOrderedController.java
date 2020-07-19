@@ -17,25 +17,25 @@ public class MedicineOrderedController implements IMedicineOrderedController {
 
     @GetMapping("/medicines-ordered")
     @ResponseStatus(HttpStatus.OK)
-    public List<MedicineOrdered> findAll() {
+    public List<MedicineOrdered> findAllMedicinesOrdered() {
         return medicineOrderedService.findAll();
     }
 
     @GetMapping("/medicines-ordered/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public MedicineOrdered findById(@PathVariable Long id) {
+    public MedicineOrdered findMedicineOrderedById(@PathVariable Long id) {
         return medicineOrderedService.findById(id);
     }
 
     @GetMapping("/medicines-ordered/order/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<MedicineOrdered> findByOrderId(@PathVariable Long id) {
+    public List<MedicineOrdered> findMedicineOrderedByOrderId(@PathVariable Long id) {
         return medicineOrderedService.findByOrderId(id);
     }
 
     @PostMapping("/medicines-ordered")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<MedicineOrdered> create(@RequestBody @Valid List<MedicineOrdered> medicines) {
+    public List<MedicineOrdered> createMedicineOrdered(@RequestBody @Valid List<MedicineOrdered> medicines) {
         return medicineOrderedService.storeMedicines(medicines);
     }
 }
