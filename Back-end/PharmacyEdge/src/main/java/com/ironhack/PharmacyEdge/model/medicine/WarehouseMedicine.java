@@ -3,8 +3,6 @@ package com.ironhack.PharmacyEdge.model.medicine;
 
 import com.ironhack.PharmacyEdge.classes.Money;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
@@ -19,7 +17,6 @@ public class WarehouseMedicine {
     @NotNull(message = "Minimum price is required")
     private Money minimumPrice;
     @NotNull
-    @Temporal(TemporalType.DATE)
     private Calendar expirationDate;
     @NotNull(message = "Price is required")
     private Money price;

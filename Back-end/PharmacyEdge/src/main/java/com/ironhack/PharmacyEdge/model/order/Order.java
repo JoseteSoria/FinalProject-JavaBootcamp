@@ -1,12 +1,9 @@
 package com.ironhack.PharmacyEdge.model.order;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Calendar;
 
 public class Order {
     private Long id;
-    @Temporal(TemporalType.TIMESTAMP)
     private Calendar date;
 
     public Order() {

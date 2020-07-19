@@ -1,11 +1,9 @@
 package com.ironhack.PharmacyEdge.classes;
 
-import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 
-@Embeddable
 public class Money {
     private static final Currency EUR = Currency.getInstance("EUR");
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;

@@ -17,7 +17,7 @@ public interface PatientClient {
     public Patient findById(@PathVariable Integer id);
 
     @GetMapping("/patients/name/{name}")
-    public Optional<Patient> findByUsername(@PathVariable(name = "name") String name);
+    public Optional<Patient> findPatientByName(@PathVariable(name = "name") String name);
 
     @PostMapping("/patients")
     public Patient create(@RequestBody @Valid Patient patient);

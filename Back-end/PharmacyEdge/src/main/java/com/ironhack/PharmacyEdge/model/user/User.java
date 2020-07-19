@@ -2,8 +2,6 @@ package com.ironhack.PharmacyEdge.model.user;
 
 import com.ironhack.PharmacyEdge.enums.Role;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +14,6 @@ public class User {
     @NotBlank(message = "Password is required")
     private String password;
     @NotNull(message = "Role is required")
-    @Enumerated(EnumType.STRING)
     private Role role;
 
     public User() {

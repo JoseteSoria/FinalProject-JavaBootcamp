@@ -1,8 +1,8 @@
-package com.ironhack.PatientService.controller.implementations;
+package com.ironhack.PharmacyEdge.controller.implementations;
 
-import com.ironhack.PatientService.controller.interfaces.IPatientController;
-import com.ironhack.PatientService.model.Patient;
-import com.ironhack.PatientService.service.PatientService;
+import com.ironhack.PharmacyEdge.controller.interfaces.IPatientController;
+import com.ironhack.PharmacyEdge.model.patient.Patient;
+import com.ironhack.PharmacyEdge.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 public class PatientController implements IPatientController {
     @Autowired
-    private PatientService patientService;
+    PatientService patientService;
 
     @GetMapping("/patients")
     @ResponseStatus(HttpStatus.OK)
@@ -28,21 +28,21 @@ public class PatientController implements IPatientController {
         return patientService.findById(id);
     }
 
-    @GetMapping( "/patients/name/{name}")
+    @GetMapping("/patients/name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<Patient> findPatientByName(@PathVariable(name = "name") String name) {
-        return patientService.findByName(name);
+        return patientService.findPatientByName(name);
     }
 
     @PostMapping("/patients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Patient create (@RequestBody @Valid Patient patient){
-        return patientService.store(patient);
+    public Patient create(@RequestBody @Valid Patient patient) {
+        return patientService.create(patient);
     }
 
     @DeleteMapping("/patients/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Integer id){
+    public void delete(@PathVariable Integer id) {
         patientService.delete(id);
     }
 }

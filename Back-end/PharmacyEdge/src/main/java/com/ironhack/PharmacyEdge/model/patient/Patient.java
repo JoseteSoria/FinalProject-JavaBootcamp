@@ -1,8 +1,6 @@
 package com.ironhack.PharmacyEdge.model.patient;
 
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,7 +10,6 @@ public class Patient {
     private Integer id;
     @NotBlank(message = "Name can not be empty")
     private String name;
-    @Temporal(TemporalType.DATE)
     private Calendar birthday;
     @NotNull
     @Pattern(regexp = "[0-9]{9}")

@@ -2,8 +2,6 @@ package com.ironhack.PharmacyEdge.model.sell;
 
 import com.ironhack.PharmacyEdge.classes.Money;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import java.util.Calendar;
 
@@ -12,7 +10,6 @@ public class Sales {
     @NotNull(message = "User Id can not be null")
     private Integer userId;
     private Integer patientId;
-    @Temporal(TemporalType.TIMESTAMP)
     private Calendar date;
     @NotNull(message = "Total price required")
     private Money totalPrice;
