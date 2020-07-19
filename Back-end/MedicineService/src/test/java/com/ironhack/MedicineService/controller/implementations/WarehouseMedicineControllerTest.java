@@ -54,7 +54,7 @@ class WarehouseMedicineControllerTest {
         when(warehouseMedicineService.findQuantityByName("Ibuprofeno")).thenReturn(Optional.of(vm));
         when(warehouseMedicineService.findByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
         doAnswer(i -> {return null;}).when(warehouseMedicineService).addWarehouseMedicines(warehouseMedicine.getId(),5);
-        doAnswer(i -> {return null;}).when(warehouseMedicineService).updatePriceByNameId(warehouseMedicine.getId(),new BigDecimal("10"));
+        doAnswer(i -> {return null;}).when(warehouseMedicineService).updatePriceByNameId(warehouseMedicine.getId(),"10");
         doAnswer(i -> {return null;}).when(warehouseMedicineService).delete(warehouseMedicine.getId());
     }
 

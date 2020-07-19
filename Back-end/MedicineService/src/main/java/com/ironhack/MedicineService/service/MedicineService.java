@@ -1,11 +1,14 @@
 package com.ironhack.MedicineService.service;
 
+import com.ironhack.MedicineService.classes.Money;
+import com.ironhack.MedicineService.exceptions.IllegalInputException;
 import com.ironhack.MedicineService.exceptions.ResourceNotFoundException;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.repository.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +22,7 @@ public class MedicineService {
     }
 
     public Medicine findById(Long id){
-        return medicineRepository.findMedicineById(id).orElseThrow(
+        return medicineRepository.findById(id).orElseThrow(
                 ()->new ResourceNotFoundException("Medicine not found with that id"));
     }
 

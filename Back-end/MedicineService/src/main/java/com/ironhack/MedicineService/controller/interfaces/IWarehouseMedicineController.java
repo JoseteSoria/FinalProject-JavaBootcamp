@@ -19,7 +19,7 @@ public interface IWarehouseMedicineController {
 
     public void addWarehouseMedicines(Long id, Integer quantity);
 
-    public void updatePrice(Long id, BigDecimal price);
+    public void updatePrice(Long id, String price);
 
     public void deleteWarehouseMedicine(Long id);
 }

@@ -49,7 +49,7 @@ public class WarehouseMedicineController implements IWarehouseMedicineController
 
     @PutMapping("/warehouse-medicines/{id}/update-price/{price}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePrice(@PathVariable(name = "id") Long id, @PathVariable(name = "price") BigDecimal price) {
+    public void updatePrice(@PathVariable(name = "id") Long id, @PathVariable(name = "price") String price) {
         warehouseMedicineService.updatePriceByNameId(id, price);
     }
 

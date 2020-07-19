@@ -67,7 +67,7 @@ class WarehouseMedicineServiceTest {
         when(medicineRepository.findById(2l)).thenReturn(Optional.empty());
         Medicine medicine2 = new Medicine("Paracetamol", 20, true, new Money(new BigDecimal("3.85")));
         when(medicineRepository.findById(2l)).thenReturn(Optional.of(medicine2));
-        when(warehouseMedicineRepository.findByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
+        when(warehouseMedicineRepository.findAllMedicinesByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
         doAnswer(i -> {
             return null;
         }).when(warehouseMedicineRepository).save(warehouseMedicine);
@@ -119,7 +119,7 @@ class WarehouseMedicineServiceTest {
     @Test
     @DisplayName("Unit test - update price of a warehouse-medicine ")
     void updatePrice() throws Exception {
-        warehouseMedicineService.updatePriceByNameId(warehouseMedicine.getId(), new BigDecimal("10"));
+        warehouseMedicineService.updatePriceByNameId(warehouseMedicine.getId(),"10");
     }
 
     @Test

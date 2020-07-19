@@ -37,7 +37,7 @@ class MedicineServiceTest {
         List<Medicine> medicines = Arrays.asList(medicine, medicine2);
         // mock responses
         when(medicineRepository.findAll()).thenReturn(medicines);
-        when(medicineRepository.findMedicineById(1l)).thenReturn(Optional.of(medicine));
+        when(medicineRepository.findById(1l)).thenReturn(Optional.of(medicine));
         when(medicineRepository.findByName("Ibuprofeno")).thenReturn(Optional.of(medicine));
     }
 

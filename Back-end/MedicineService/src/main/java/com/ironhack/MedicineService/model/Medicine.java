@@ -6,10 +6,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "medicine")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Medicine {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer monthDuration;

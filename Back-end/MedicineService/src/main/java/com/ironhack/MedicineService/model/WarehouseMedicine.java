@@ -7,7 +7,19 @@ import java.util.Calendar;
 
 @Entity
 @Table(name = "warehouse_medicine")
-public class WarehouseMedicine extends Medicine {
+public class WarehouseMedicine {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private Integer monthDuration;
+    private Boolean generic;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "min_price")),
+            @AttributeOverride(name = "currency", column = @Column(name = "min_currency")),
+    })
+    private Money minimumPrice;
     @Temporal(TemporalType.DATE)
     private Calendar expirationDate;
     @Embedded
@@ -20,16 +32,30 @@ public class WarehouseMedicine extends Medicine {
     public WarehouseMedicine() {
     }
 
-    public WarehouseMedicine(Medicine medicine){
-        super(medicine.getName(), medicine.getMonthDuration(), medicine.getGeneric(), medicine.getMinimumPrice());
-        setExpirationDate();
-        this.price = this.getMinimumPrice();
-    }
-
-    public WarehouseMedicine(String name, Integer monthDuration, Boolean generic, Money recommendedPrice, Money price) {
-        super(name, monthDuration, generic, recommendedPrice);
+    public WarehouseMedicine(String name, Integer monthDuration, Boolean generic, Money minimumPrice, Money price) {
+        this.name = name;
+        this.monthDuration = monthDuration;
+        this.generic = generic;
+        this.minimumPrice = minimumPrice;
         setExpirationDate();
         this.price = price;
+    }
+
+    public WarehouseMedicine(Medicine medicine){
+        this.name = medicine.getName();
+        this.monthDuration = medicine.getMonthDuration();
+        this.generic = medicine.getGeneric();
+        this.minimumPrice = medicine.getMinimumPrice();
+        setExpirationDate();
+        this.price = medicine.getMinimumPrice();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Calendar getExpirationDate() {
@@ -46,11 +72,47 @@ public class WarehouseMedicine extends Medicine {
         expirationDate.add(Calendar.MONTH,this.getMonthDuration());
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getMonthDuration() {
+        return monthDuration;
+    }
+
+    public void setMonthDuration(Integer monthDuration) {
+        this.monthDuration = monthDuration;
+    }
+
     public Money getPrice() {
         return price;
     }
 
     public void setPrice(Money price) {
         this.price = price;
+    }
+
+    public Boolean getGeneric() {
+        return generic;
+    }
+
+    public void setGeneric(Boolean generic) {
+        this.generic = generic;
+    }
+
+    public Money getMinimumPrice() {
+        return minimumPrice;
+    }
+
+    public void setMinimumPrice(Money minimumPrice) {
+        this.minimumPrice = minimumPrice;
+    }
+
+    public void setExpirationDate(Calendar expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }
