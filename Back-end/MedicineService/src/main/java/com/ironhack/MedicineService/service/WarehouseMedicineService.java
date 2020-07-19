@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,40 +32,32 @@ public class WarehouseMedicineService {
                 ()->new ResourceNotFoundException("Warehouse medicine not found with that id"));
     }
 
-    public WarehouseMedicine newStore(Long medicineId){
+//    public WarehouseMedicine newStore(Long medicineId){
+//        Medicine medicine = medicineRepository.findById(medicineId).orElseThrow(
+//                ()->new ResourceNotFoundException("Medicine not found with that id"));
+//        Optional<WarehouseMedicineQuantityVM> warehouseMedicine = findByName(medicine.getName());
+//        if(!warehouseMedicine.isEmpty()){
+//            throw new IllegalInputException("That medicine is already in our database");
+//        }
+//        return warehouseMedicineRepository.save(new WarehouseMedicine(medicine,0));
+//    }
+
+    public void addWarehouseMedicines(Long medicineId, Integer quantity){
         Medicine medicine = medicineRepository.findById(medicineId).orElseThrow(
                 ()->new ResourceNotFoundException("Medicine not found with that id"));
-        Optional<WarehouseMedicineQuantityVM> warehouseMedicine = findByName(medicine.getName());
-        if(!warehouseMedicine.isEmpty()){
-            throw new IllegalInputException("That medicine is already in our database");
-        }
-        return warehouseMedicineRepository.save(new WarehouseMedicine(medicine,0));
+        WarehouseMedicine warehouseMedicine = new WarehouseMedicine(medicine);
+        List<WarehouseMedicine> warehouseMedicineList = Collections.nCopies(quantity, warehouseMedicine);
+        warehouseMedicineRepository.saveAll(warehouseMedicineList);
     }
 
-    public void addQuantity(Long warehouseMedicineId, Integer quantity){
-        WarehouseMedicine warehouseMedicine = findById(warehouseMedicineId);
-        warehouseMedicine.setQuantity(warehouseMedicine.getQuantity() + quantity);
-        warehouseMedicineRepository.save(warehouseMedicine);
-    }
-
-    public void reduceQuantity(Long warehouseMedicineId, Integer quantity){
-        WarehouseMedicine warehouseMedicine = findById(warehouseMedicineId);
-        if (quantity > warehouseMedicine.getQuantity()){
-            throw new IllegalArgumentException("There are not so many medicines of that type");
-        }
-        warehouseMedicine.setQuantity(warehouseMedicine.getQuantity() - quantity);
-        warehouseMedicineRepository.save(warehouseMedicine);
-    }
-
-    public void updatePrice(Long warehouseMedicineId, BigDecimal newPrice){
+    public void updatePriceByNameId(Long warehouseMedicineId, BigDecimal newPrice){
         WarehouseMedicine warehouseMedicine = findById(warehouseMedicineId);
         if (newPrice.compareTo(warehouseMedicine.getMinimumPrice().getAmount()) < 0){
             warehouseMedicine.setPrice(warehouseMedicine.getMinimumPrice());
         }
         else{
-            warehouseMedicine.setPrice(new Money(newPrice));
+            warehouseMedicineRepository.updatePriceByName(warehouseMedicine.getName(), newPrice);
         }
-        warehouseMedicineRepository.save(warehouseMedicine);
     }
 
     public void delete(Long id){
@@ -72,8 +65,8 @@ public class WarehouseMedicineService {
         warehouseMedicineRepository.delete(warehouseMedicine);
     }
 
-    public Optional<WarehouseMedicineQuantityVM> findByName(String name) {
-        Optional<Object[]> obj = warehouseMedicineRepository.findMedicinesByName(name);
+    public Optional<WarehouseMedicineQuantityVM> findQuantityByName(String name) {
+        Optional<Object[]> obj = warehouseMedicineRepository.findMedicineQuantityByName(name);
         if (!obj.isEmpty()) {
             WarehouseMedicineQuantityVM vm = (WarehouseMedicineQuantityVM) (obj.get()[0]);
             return Optional.of(new WarehouseMedicineQuantityVM(vm.getName(), vm.getQuantity()));
@@ -81,5 +74,9 @@ public class WarehouseMedicineService {
         else{
             return Optional.empty();
         }
+    }
+
+    public Optional<List<WarehouseMedicine>> findByName(String name) {
+         return warehouseMedicineRepository.findByName(name);
     }
 }

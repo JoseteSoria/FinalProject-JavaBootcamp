@@ -8,7 +8,6 @@ import java.util.Calendar;
 @Entity
 @Table(name = "warehouse_medicine")
 public class WarehouseMedicine extends Medicine {
-    private Integer quantity;
     @Temporal(TemporalType.DATE)
     private Calendar expirationDate;
     @Embedded
@@ -21,26 +20,16 @@ public class WarehouseMedicine extends Medicine {
     public WarehouseMedicine() {
     }
 
-    public WarehouseMedicine(Medicine medicine, Integer quantity){
+    public WarehouseMedicine(Medicine medicine){
         super(medicine.getName(), medicine.getMonthDuration(), medicine.getGeneric(), medicine.getMinimumPrice());
-        this.quantity= quantity;
         setExpirationDate();
         this.price = this.getMinimumPrice();
     }
 
-    public WarehouseMedicine(String name, Integer monthDuration, Boolean generic, Money recommendedPrice, Integer quantity, Money price) {
+    public WarehouseMedicine(String name, Integer monthDuration, Boolean generic, Money recommendedPrice, Money price) {
         super(name, monthDuration, generic, recommendedPrice);
-        this.quantity = quantity;
         setExpirationDate();
         this.price = price;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public Calendar getExpirationDate() {
