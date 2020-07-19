@@ -5,17 +5,21 @@ import com.ironhack.PharmacyEdge.exceptions.UserServiceDownException;
 import com.ironhack.PharmacyEdge.model.user.User;
 import com.ironhack.PharmacyEdge.model.user.dto.UserDTO;
 import com.ironhack.PharmacyEdge.model.user.viewModel.UserVM;
+import com.ironhack.PharmacyEdge.security.CustomSecurityUser;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
     @Autowired
@@ -65,19 +69,19 @@ public class UserService {
         throw new UserServiceDownException("User Service Down. Method delete. ");
     }
 
-//    @Override
-//    @HystrixCommand(fallbackMethod = "errorLoadUserByUsername")
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        LOGGER.info("Load user by username " + username);
-//        Optional<SalesRep> user = userClient.findByUsername(username);
-//        System.out.println("Usuario buscado");
-//        return new CustomSecurityUser(user.orElseThrow(() ->
-//                new UsernameNotFoundException("Invalid username/password combination.")));
-//    }
-//
-//    public UserDetails errorLoadUserByUsername(String username){
-//        LOGGER.error("Controlled exception - Fail in Authorization to find user (salesRep) with name " + username);
-//        throw new SalesRepServiceDownException("SalesRep Service Down. Method loadUserByUsername. ");
-//    }
+    @Override
+    @HystrixCommand(fallbackMethod = "errorLoadUserByUsername")
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        LOGGER.info("Load user by username " + username);
+        Optional<User> user = userClient.findByUsername(username);
+        System.out.println("Usuario buscado");
+        return new CustomSecurityUser(user.orElseThrow(() ->
+                new UsernameNotFoundException("Invalid username/password combination.")));
+    }
+
+    public UserDetails errorLoadUserByUsername(String username){
+        LOGGER.error("Controlled exception - Fail in Authorization to find user (salesRep) with name " + username);
+        throw new UserServiceDownException("User Service Down. Method loadUserByUsername. ");
+    }
 
 }

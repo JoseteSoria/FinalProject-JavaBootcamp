@@ -40,6 +40,4 @@ public class UserController implements IUserController {
         userService.delete(id);
     }
 
-//    @GetMapping("/users/username/{username}")
-//    public Optional<User> findByUsername(@PathVariable(name = "username") String username);
 }
