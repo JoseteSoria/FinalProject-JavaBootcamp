@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Medicine } from '../../models/medicine.model';
+import { Medicine } from '../../models/medicine/medicine.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

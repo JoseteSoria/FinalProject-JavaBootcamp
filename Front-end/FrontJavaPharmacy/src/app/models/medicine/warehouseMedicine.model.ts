@@ -1,6 +1,4 @@
-import { MonoTypeOperatorFunction } from "rxjs";
-
-import { Money } from './money.model';
+import { Money } from '../money.model';
 
 export interface WarehouseMedicine {
     id: number;

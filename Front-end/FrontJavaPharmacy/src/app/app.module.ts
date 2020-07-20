@@ -13,6 +13,7 @@ import { MedicineListComponent } from './components/medicine-list/medicine-list.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { WarehouseMedicineListComponent } from './components/warehouse-medicine-list/warehouse-medicine-list.component';
+import { PatientListComponent } from './components/patient-list/patient-list.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { WarehouseMedicineListComponent } from './components/warehouse-medicine-
     AppComponent,
     MedicineListComponent,
     UserListComponent,
-    WarehouseMedicineListComponent
+    WarehouseMedicineListComponent,
+    PatientListComponent
   ],
   imports: [
     BrowserModule,

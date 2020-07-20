@@ -1,4 +1,4 @@
-import { Money } from './money.model';
+import { Money } from '../money.model';
 
 export interface Medicine {
     id: number;

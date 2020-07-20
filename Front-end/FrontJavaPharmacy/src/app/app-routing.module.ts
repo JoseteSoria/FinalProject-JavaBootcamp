@@ -3,12 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { MedicineListComponent } from './components/medicine-list/medicine-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { WarehouseMedicineListComponent } from './components/warehouse-medicine-list/warehouse-medicine-list.component';
-
+import { PatientListComponent } from './components/patient-list/patient-list.component';
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
   { path: 'medicines', component: MedicineListComponent },
-  { path: 'warehouse-medicines', component: WarehouseMedicineListComponent }
+  { path: 'warehouse-medicines', component: WarehouseMedicineListComponent },
+  { path: 'patients', component: PatientListComponent}
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../models/user.model';
+import { User } from '../../models/user/user.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -17,7 +17,6 @@ export class UserListComponent implements OnInit {
     'username',
     'role'
   ];
-
 
   constructor(private router: Router, private http: HttpClient) { }
 
