@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SellService {
@@ -117,6 +118,7 @@ public class SellService {
     public void makeSale(List<MedicinesToSellDTO> medicinesToSellDTOS) {
         List<MedicineSold> medicinesSold = new ArrayList<>();
         Money totalPrice = new Money(new BigDecimal("0"));
+        checkRepeatable(medicinesToSellDTOS);
         for (MedicinesToSellDTO medicinesToSellDTO : medicinesToSellDTOS) {
             WarehouseMedicine warehouseMedicine = medicineService.findWarehouseMedicineById(
                     medicinesToSellDTO.getWarehouseMedicineId());
@@ -130,5 +132,16 @@ public class SellService {
         //The following two lines order is important (In orders is in the order way)
         medicineService.removeWarehouseMedicinesMultiple(medicinesToSellDTOS);
         storeMedicinesSold(medicinesSold);
+    }
+
+    private void checkRepeatable(List<MedicinesToSellDTO> medicinesToSellDTOS) {
+        List<Long> medicineIds = new ArrayList<>();
+        for (MedicinesToSellDTO medicinesToSellDTO: medicinesToSellDTOS){
+            medicineIds.add(medicinesToSellDTO.getWarehouseMedicineId());
+        }
+        List<Long> newList = medicineIds.stream().distinct().collect(Collectors.toList());
+        if(newList.size()!=medicineIds.size()){
+            throw new IllegalArgumentException("There are the same medicineId more than once");
+        }
     }
 }
