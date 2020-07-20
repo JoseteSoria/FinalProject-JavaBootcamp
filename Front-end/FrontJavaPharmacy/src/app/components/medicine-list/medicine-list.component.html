@@ -1,37 +1,34 @@
-<p>medicine-list works!</p>
 <div class="bg">
     <h2 class="title">Medicines</h2>
     <div *ngIf="medicines" class="resource-list">
-      <mat-table [dataSource]="medicines" class="mat-elevation-z8">
-        <ng-container matColumnDef="medicineId">
-          <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-          <mat-cell *matCellDef="let medicine"> {{medicine.id}} </mat-cell>
-        </ng-container>
-  
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-          <mat-cell *matCellDef="let medicine"> {{medicine.name}} </mat-cell>
-        </ng-container>
-  
-        <ng-container matColumnDef="monthDuration">
-          <mat-header-cell *matHeaderCellDef> Duration (months) </mat-header-cell>
-          <mat-cell *matCellDef="let medicine"> {{medicine.monthDuration}} </mat-cell>
-        </ng-container>
-  
-        <ng-container matColumnDef="generic">
-          <mat-header-cell *matHeaderCellDef> Generic </mat-header-cell>
-          <mat-cell *matCellDef="let medicine"> {{medicine.generic}} </mat-cell>
-        </ng-container>
+        <mat-table [dataSource]="medicines" class="mat-elevation-z8">
+            <ng-container matColumnDef="medicineId">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let medicine"> {{medicine.id}} </mat-cell>
+            </ng-container>
 
-        <ng-container matColumnDef="minimumPrice">
-            <mat-header-cell *matHeaderCellDef> Min Price (EUR)</mat-header-cell>
-            <mat-cell *matCellDef="let medicine"> {{medicine.minimumPrice.amount}} </mat-cell>
-          </ng-container>
-  
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let medicine"> {{medicine.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="monthDuration">
+                <mat-header-cell *matHeaderCellDef> Duration (months) </mat-header-cell>
+                <mat-cell *matCellDef="let medicine"> {{medicine.monthDuration}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="generic">
+                <mat-header-cell *matHeaderCellDef> Generic </mat-header-cell>
+                <mat-cell *matCellDef="let medicine"> {{medicine.generic}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="minimumPrice">
+                <mat-header-cell *matHeaderCellDef> Min Price (EUR)</mat-header-cell>
+                <mat-cell *matCellDef="let medicine"> {{medicine.minimumPrice.amount}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
     </div>
-  </div>
-  
-  
+</div>

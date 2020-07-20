@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Medicine } from '../../models/medicine.model';
+import { Medicine } from '../../models/medicine/medicine.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -22,7 +22,8 @@ export class MedicineListComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<Medicine[]>('http://localhost:8082/medicines').subscribe(medicines => this.medicines = medicines);
+    this.http.get<Medicine[]>('http://localhost:8082/medicines')
+    .subscribe(medicines => this.medicines = medicines);
   }
 
 }

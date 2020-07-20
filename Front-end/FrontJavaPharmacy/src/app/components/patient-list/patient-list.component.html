@@ -1,0 +1,29 @@
+<div class="bg">
+    <h2 class="title">Patients</h2>
+    <div *ngIf="patients" class="resource-list">
+        <mat-table [dataSource]="patients" class="mat-elevation-z8">
+            <ng-container matColumnDef="patientId">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let patient"> {{patient.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let patient"> {{patient.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="birthday">
+                <mat-header-cell *matHeaderCellDef> Birthday </mat-header-cell>
+                <mat-cell *matCellDef="let patient"> {{patient.birthday.substring(0, 10)}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="phoneNumber">
+                <mat-header-cell *matHeaderCellDef> Phone-Number </mat-header-cell>
+                <mat-cell *matCellDef="let patient"> {{patient.phoneNumber}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>

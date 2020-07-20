@@ -10,7 +10,3 @@ mat-table {
     width: 80%;
     margin: 0 auto !important;
 }
-
-.mat-column-id{
-    max-width: 5em;
-}
