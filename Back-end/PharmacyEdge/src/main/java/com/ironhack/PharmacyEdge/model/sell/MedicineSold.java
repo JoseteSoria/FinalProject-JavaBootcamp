@@ -9,7 +9,7 @@ public class MedicineSold {
     @NotNull(message = "Medicine Id can not be null")
     private Long medicineId;
     @NotNull(message = "Name can not be null")
-    private String name;
+    private String medicineName;
     @NotNull(message = "Money can not be null")
     private Money price;
     @NotNull(message = "Sales Id can not be null")
@@ -18,15 +18,15 @@ public class MedicineSold {
     public MedicineSold() {
     }
 
-    public MedicineSold(Long medicineId, String name, Long salesId) {
+    public MedicineSold(Long medicineId, String medicineName, Long salesId) {
         this.medicineId = medicineId;
-        this.name = name;
+        this.medicineName = medicineName;
         this.salesId = salesId;
     }
 
-    public MedicineSold(Long medicineId, String name, Money price, Long salesId) {
+    public MedicineSold(Long medicineId, String medicineName, Money price, Long salesId) {
         this.medicineId = medicineId;
-        this.name = name;
+        this.medicineName = medicineName;
         this.price = price;
         this.salesId = salesId;
     }
@@ -55,12 +55,12 @@ public class MedicineSold {
         this.salesId = salesId;
     }
 
-    public String getName() {
-        return name;
+    public String getMedicineName() {
+        return medicineName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
     }
 
     public Money getPrice() {

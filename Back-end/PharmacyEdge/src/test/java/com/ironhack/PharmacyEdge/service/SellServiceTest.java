@@ -3,7 +3,6 @@ package com.ironhack.PharmacyEdge.service;
 import com.ironhack.PharmacyEdge.classes.Money;
 import com.ironhack.PharmacyEdge.client.SellClient;
 import com.ironhack.PharmacyEdge.exceptions.SellServiceDownException;
-import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.sell.MedicineSold;
 import com.ironhack.PharmacyEdge.model.sell.Sales;
