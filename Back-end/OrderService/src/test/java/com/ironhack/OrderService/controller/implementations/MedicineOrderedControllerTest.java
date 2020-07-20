@@ -42,13 +42,14 @@ class MedicineOrderedControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         medicineOrdered = new MedicineOrdered(1l,1l,10);
         medicineOrdered.setId(1l);
+        medicineOrdered.setMedicineName("Ibuprofeno");
         MedicineOrdered medicineOrdered2 = new MedicineOrdered(1l,2l,5);
 
         List<MedicineOrdered> medicines = Arrays.asList(medicineOrdered, medicineOrdered2);
         when(medicineOrderedService.findAll()).thenReturn(medicines);
         when(medicineOrderedService.findById(medicineOrdered.getId())).thenReturn(medicineOrdered);
         when(medicineOrderedService.findByOrderId(1l)).thenReturn(medicines);
-        medicineOrdered3 = new MedicineOrdered(1l,3l,5);
+        medicineOrdered3 = new MedicineOrdered(1l,3l, "Nolotil", 5);
         doAnswer(i -> {
             return null;
         }).when(medicineOrderedService).storeMedicines(Collections.singletonList(medicineOrdered3));

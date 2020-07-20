@@ -1,15 +1,20 @@
 package com.ironhack.PharmacyEdge.service;
 
+import com.ironhack.PharmacyEdge.classes.Money;
 import com.ironhack.PharmacyEdge.client.OrderClient;
 import com.ironhack.PharmacyEdge.exceptions.OrderServiceDownException;
+import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.order.MedicineOrdered;
 import com.ironhack.PharmacyEdge.model.order.Order;
+import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +23,8 @@ public class OrderService {
 
     @Autowired
     OrderClient orderClient;
+    @Autowired
+    MedicineService medicineService;
 
     @HystrixCommand(fallbackMethod = "errorFindAllOrders")
     public List<Order> findAllOrders() {
@@ -105,5 +112,21 @@ public class OrderService {
     public List<MedicineOrdered> errorCreateMedicineOrdered(List<MedicineOrdered> medicines) {
         LOGGER.error("Controlled exception - fail in POST request to add new medicines ordered");
         throw new OrderServiceDownException(" Order Service Down. Method createMedicineOrdered. ");
+    }
+
+    public void placeOrder(List<MedicinesToStoreDTO> medicinesToStoreDTOS) {
+        List<MedicineOrdered> medicinesOrdered = new ArrayList<>();
+        Money totalPrice = new Money(new BigDecimal("0"));
+        for (MedicinesToStoreDTO medicinesToStoreDTO : medicinesToStoreDTOS) {
+            Medicine medicine = medicineService.findMedicineById(medicinesToStoreDTO.getMedicineId());
+            medicinesOrdered.add(new MedicineOrdered(0l, medicine.getId(), medicine.getName(), medicinesToStoreDTO.getQuantity()));
+            totalPrice.increaseAmount(medicine.getMinimumPrice().getAmount().multiply(new BigDecimal("0.4")));
+        }
+        Order order = createOrder(new Order(totalPrice));
+        for(MedicineOrdered medicineOrdered : medicinesOrdered){
+            medicineOrdered.setOrderId(order.getId());
+        }
+        List<MedicineOrdered> medicineOrderedList = createMedicineOrdered(medicinesOrdered);
+        medicineService.addWarehouseMedicines(medicinesToStoreDTOS);
     }
 }

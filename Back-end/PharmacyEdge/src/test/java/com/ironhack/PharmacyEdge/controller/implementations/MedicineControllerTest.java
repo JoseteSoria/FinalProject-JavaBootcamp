@@ -5,12 +5,14 @@ import com.ironhack.PharmacyEdge.classes.Money;
 import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
+import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
 import com.ironhack.PharmacyEdge.service.MedicineService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -40,6 +42,7 @@ class MedicineControllerTest {
 
     private Medicine medicine;
     private WarehouseMedicine warehouseMedicine;
+    MedicinesToStoreDTO medicinesToStoreDTO;
 
     @BeforeEach
     void setUp() {
@@ -61,9 +64,10 @@ class MedicineControllerTest {
         WarehouseMedicineQuantityVM vm = new WarehouseMedicineQuantityVM("Ibuprofeno", 1);
         when(medicineService.findQuantityByName("Ibuprofeno")).thenReturn(Optional.of(vm));
         when(medicineService.findWarehouseMedicineByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
+        medicinesToStoreDTO = new MedicinesToStoreDTO(1l, 3);
         doAnswer(i -> {
             return null;
-        }).when(medicineService).addWarehouseMedicines(warehouseMedicine.getId(), 5);
+        }).when(medicineService).addWarehouseMedicines(Collections.singletonList(medicinesToStoreDTO));
         doAnswer(i -> {
             return null;
         }).when(medicineService).updatePrice(warehouseMedicine.getId(), "10");
@@ -117,7 +121,8 @@ class MedicineControllerTest {
 
     @Test
     void addWarehouseMedicines() throws Exception {
-        mockMvc.perform(post("/warehouse-medicines/1/add/5"))
+        mockMvc.perform(post("/warehouse-medicines/add").content(objectMapper.writeValueAsString(Collections.singletonList(medicinesToStoreDTO)))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
     }
 

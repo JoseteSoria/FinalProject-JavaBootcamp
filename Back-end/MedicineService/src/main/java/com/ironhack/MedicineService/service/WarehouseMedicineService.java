@@ -4,12 +4,14 @@ import com.ironhack.MedicineService.classes.Money;
 import com.ironhack.MedicineService.exceptions.ResourceNotFoundException;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.dto.MedicinesToStoreDTO;
 import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.repository.MedicineRepository;
 import com.ironhack.MedicineService.repository.WarehouseMedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +32,6 @@ public class WarehouseMedicineService {
         return warehouseMedicineRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Warehouse medicine not found with that id"));
     }
-
-//    public WarehouseMedicine newStore(Long medicineId){
-//        Medicine medicine = medicineRepository.findById(medicineId).orElseThrow(
-//                ()->new ResourceNotFoundException("Medicine not found with that id"));
-//        Optional<WarehouseMedicineQuantityVM> warehouseMedicine = findByName(medicine.getName());
-//        if(!warehouseMedicine.isEmpty()){
-//            throw new IllegalInputException("That medicine is already in our database");
-//        }
-//        return warehouseMedicineRepository.save(new WarehouseMedicine(medicine,0));
-//    }
 
     public void addWarehouseMedicines(Long medicineId, Integer quantity) {
         Medicine medicine = medicineRepository.findById(medicineId).orElseThrow(
@@ -89,5 +81,12 @@ public class WarehouseMedicineService {
 
     public Optional<List<WarehouseMedicine>> findByName(String name) {
         return warehouseMedicineRepository.findAllMedicinesByName(name);
+    }
+
+    @Transactional
+    public void addWarehouseMedicinesMultiple(List<MedicinesToStoreDTO> medicinesToStoreDTOS) {
+        for(MedicinesToStoreDTO medicinesToStoreDTO: medicinesToStoreDTOS){
+            addWarehouseMedicines(medicinesToStoreDTO.getMedicineId(), medicinesToStoreDTO.getQuantity());
+        }
     }
 }

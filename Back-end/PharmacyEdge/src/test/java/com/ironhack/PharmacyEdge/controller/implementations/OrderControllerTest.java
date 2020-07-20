@@ -1,6 +1,7 @@
 package com.ironhack.PharmacyEdge.controller.implementations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ironhack.PharmacyEdge.classes.Money;
 import com.ironhack.PharmacyEdge.model.order.MedicineOrdered;
 import com.ironhack.PharmacyEdge.model.order.Order;
 import com.ironhack.PharmacyEdge.service.OrderService;
@@ -14,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +48,7 @@ class OrderControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         order = new Order();
         order.setId(1l);
-        Order order2 = new Order();
+        Order order2 = new Order(new Money(new BigDecimal("8.12")));
         List<Order> orders = Arrays.asList(order, order2);
         when(orderService.findAllOrders()).thenReturn(orders);
         when(orderService.findOrderById(order.getId())).thenReturn(order);
@@ -62,7 +64,7 @@ class OrderControllerTest {
         when(orderService.findAllMedicinesOrdered()).thenReturn(medicines);
         when(orderService.findMedicineOrderedById(medicineOrdered.getId())).thenReturn(medicineOrdered);
         when(orderService.findMedicineOrderedByOrderId(1l)).thenReturn(medicines);
-        medicineOrdered3 = new MedicineOrdered(1l,3l,5);
+        medicineOrdered3 = new MedicineOrdered(1l,3l, "Nolotil",5);
         doAnswer(i -> {
             return null;
         }).when(orderService).createMedicineOrdered(Collections.singletonList(medicineOrdered3));

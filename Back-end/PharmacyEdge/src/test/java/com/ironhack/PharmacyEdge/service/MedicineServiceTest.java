@@ -6,6 +6,7 @@ import com.ironhack.PharmacyEdge.exceptions.MedicineServiceDownException;
 import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
+import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -58,12 +59,14 @@ class MedicineServiceTest {
         when(medicineClient.findQuantityByName("Ibuprofeno")).thenReturn(Optional.of(vm));
         when(medicineClient.findMedicineById(2l)).thenReturn(medicine2);
         when(medicineClient.findWarehouseMedicineByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
+        MedicinesToStoreDTO medicinesToStoreDTO = new MedicinesToStoreDTO(1l, 3);
+        MedicinesToStoreDTO medicinesToStoreDTO2 = new MedicinesToStoreDTO(2l, 2);
         doAnswer(i -> {
             return null;
-        }).when(medicineClient).addWarehouseMedicines(medicine.getId(), 1);
+        }).when(medicineClient).addWarehouseMedicines(Collections.singletonList(medicinesToStoreDTO));
         doAnswer(i -> {
             return null;
-        }).when(medicineClient).addWarehouseMedicines(medicine2.getId(), 1);
+        }).when(medicineClient).addWarehouseMedicines(Collections.singletonList(medicinesToStoreDTO2));
         doAnswer(i -> {
             return null;
         }).when(medicineClient).deleteWarehouseMedicine(warehouseMedicine.getId());
@@ -151,12 +154,12 @@ class MedicineServiceTest {
     @Test
     @DisplayName("Unit test - add quantity of a warehouse-medicine ")
     void addWarehouseMedicines() throws Exception {
-        medicineService.addWarehouseMedicines(warehouseMedicine.getId(), 5);
+        medicineService.addWarehouseMedicines(Collections.singletonList(new MedicinesToStoreDTO(1l, 3)));
     }
 
     @Test
     void errorAddWarehouseMedicines() {
-        assertThrows(MedicineServiceDownException.class, () -> medicineService.errorAddWarehouseMedicines(null, null));
+        assertThrows(MedicineServiceDownException.class, () -> medicineService.errorAddWarehouseMedicines(null));
     }
 
     @Test
