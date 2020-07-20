@@ -5,6 +5,7 @@ import com.ironhack.PharmacyEdge.exceptions.MedicineServiceDownException;
 import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
+import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -77,12 +78,12 @@ public class MedicineService {
     }
 
     @HystrixCommand(fallbackMethod = "errorAddWarehouseMedicines")
-    public void addWarehouseMedicines(Long medicineId, Integer quantity) {
+    public void addWarehouseMedicines(List<MedicinesToStoreDTO> medicinesToStoreDTOS) {
         LOGGER.info("POST request to add warehouse-medicine by medicineId and quantity. ");
-        medicineClient.addWarehouseMedicines(medicineId, quantity);
+        medicineClient.addWarehouseMedicines(medicinesToStoreDTOS);
     }
 
-    public void errorAddWarehouseMedicines(Long medicineId, Integer quantity) {
+    public void errorAddWarehouseMedicines(List<MedicinesToStoreDTO> medicinesToStoreDTOS) {
         LOGGER.error("Controlled exception - fail in POST request to add warehouse-medicine by medicineId and quantity. ");
         throw new MedicineServiceDownException(" Medicine Service Down. Method findWarehouseMedicineById. ");
     }

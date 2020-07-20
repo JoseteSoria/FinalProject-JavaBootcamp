@@ -1,7 +1,9 @@
 package com.ironhack.MedicineService.controller.interfaces;
 
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.dto.MedicinesToStoreDTO;
 import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,7 +19,7 @@ public interface IWarehouseMedicineController {
 
     public Optional<List<WarehouseMedicine>> findWarehouseMedicineByName(String name);
 
-    public void addWarehouseMedicines(Long id, Integer quantity);
+    public void addWarehouseMedicines(List<MedicinesToStoreDTO> medicinesToStoreDTOS);
 
     public void updatePrice(Long id, String price);
 

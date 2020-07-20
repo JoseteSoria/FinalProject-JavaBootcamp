@@ -2,7 +2,6 @@ package com.ironhack.PharmacyEdge.service;
 
 import com.ironhack.PharmacyEdge.classes.Money;
 import com.ironhack.PharmacyEdge.client.SellClient;
-import com.ironhack.PharmacyEdge.exceptions.OrderServiceDownException;
 import com.ironhack.PharmacyEdge.exceptions.SellServiceDownException;
 import com.ironhack.PharmacyEdge.model.sell.MedicineSold;
 import com.ironhack.PharmacyEdge.model.sell.Sales;
@@ -17,9 +16,9 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 

@@ -2,6 +2,7 @@ package com.ironhack.MedicineService.controller.implementations;
 
 import com.ironhack.MedicineService.controller.interfaces.IWarehouseMedicineController;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.dto.MedicinesToStoreDTO;
 import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.service.WarehouseMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,17 @@ public class WarehouseMedicineController implements IWarehouseMedicineController
         return warehouseMedicineService.findByName(name);
     }
 
-    @PostMapping("/warehouse-medicines/{id}/add/{quantity}")
+//    Deprecated
+//    @PostMapping("/warehouse-medicines/{id}/add/{quantity}")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void addWarehouseMedicineOnce(@PathVariable(name = "id") Long id, @PathVariable(name = "quantity") Integer quantity) {
+//        warehouseMedicineService.addWarehouseMedicines(id, quantity);
+//    }
+
+    @PostMapping("/warehouse-medicines/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addWarehouseMedicines(@PathVariable(name = "id") Long id, @PathVariable(name = "quantity") Integer quantity) {
-        warehouseMedicineService.addWarehouseMedicines(id, quantity);
+    public void addWarehouseMedicines(@RequestBody List<MedicinesToStoreDTO> medicinesToStoreDTOS) {
+        warehouseMedicineService.addWarehouseMedicinesMultiple(medicinesToStoreDTOS);
     }
 
     @PutMapping("/warehouse-medicines/{id}/update-price/{price}")

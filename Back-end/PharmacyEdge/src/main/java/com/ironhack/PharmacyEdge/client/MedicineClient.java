@@ -3,6 +3,7 @@ package com.ironhack.PharmacyEdge.client;
 import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
+import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,8 @@ public interface MedicineClient {
     @GetMapping("/warehouse-medicines/name/{name}")
     public Optional<List<WarehouseMedicine>> findWarehouseMedicineByName(@PathVariable(name = "name") String name);
 
-    @PostMapping("/warehouse-medicines/{id}/add/{quantity}")
-    public void addWarehouseMedicines(@PathVariable(name = "id") Long id, @PathVariable(name = "quantity") Integer quantity);
+    @PostMapping("/warehouse-medicines/add")
+    public void addWarehouseMedicines(@RequestBody List<MedicinesToStoreDTO> medicinesToStoreDTOS);
 
     @PutMapping("/warehouse-medicines/{id}/update-price/{price}")
     public void updatePrice(@PathVariable(name = "id") Long id, @PathVariable(name = "price") String price);

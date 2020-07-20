@@ -4,6 +4,7 @@ import com.ironhack.PharmacyEdge.controller.interfaces.IMedicineController;
 import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
+import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
 import com.ironhack.PharmacyEdge.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,10 +60,10 @@ public class MedicineController implements IMedicineController {
         return medicineService.findWarehouseMedicineByName(name);
     }
 
-    @PostMapping("/warehouse-medicines/{id}/add/{quantity}")
+    @PostMapping("/warehouse-medicines/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addWarehouseMedicines(@PathVariable(name = "id") Long id, @PathVariable(name = "quantity") Integer quantity){
-        medicineService.addWarehouseMedicines(id, quantity);
+    public void addWarehouseMedicines(@RequestBody List<MedicinesToStoreDTO> medicinesToStoreDTOS){
+        medicineService.addWarehouseMedicines(medicinesToStoreDTOS);
     }
 
     @PutMapping("/warehouse-medicines/{id}/update-price/{price}")

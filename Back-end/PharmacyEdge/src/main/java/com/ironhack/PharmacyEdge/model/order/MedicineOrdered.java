@@ -9,6 +9,7 @@ public class MedicineOrdered {
     private Long orderId;
     @NotNull(message = "Medicine id can not be null")
     private Long medicineId;
+    private String medicineName;
     @Positive(message = "Quantity has to be a positive integer")
     private Integer quantity;
 
@@ -19,6 +20,13 @@ public class MedicineOrdered {
         this.orderId = orderId;
         this.medicineId = medicineId;
         this.quantity = quantity;
+    }
+
+    public MedicineOrdered(Long orderId, Long medicineId, String medicineName, Integer quantity) {
+        this.orderId = orderId;
+        this.medicineId = medicineId;
+        this.quantity = quantity;
+        this.medicineName = medicineName;
     }
 
     public Long getId() {
@@ -51,6 +59,14 @@ public class MedicineOrdered {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
     }
 }
 

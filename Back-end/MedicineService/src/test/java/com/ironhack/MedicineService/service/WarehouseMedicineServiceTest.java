@@ -5,6 +5,7 @@ import com.ironhack.MedicineService.classes.Money;
 import com.ironhack.MedicineService.exceptions.ResourceNotFoundException;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.dto.MedicinesToStoreDTO;
 import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.repository.MedicineRepository;
 import com.ironhack.MedicineService.repository.WarehouseMedicineRepository;
@@ -117,12 +118,19 @@ class WarehouseMedicineServiceTest {
     }
 
     @Test
+    @DisplayName("Unit test - add warehouse-medicines ")
+    void addWarehouseMedicinesMultiple() throws Exception {
+        warehouseMedicineService.addWarehouseMedicinesMultiple(Collections.singletonList(new MedicinesToStoreDTO(warehouseMedicine.getId(), 5)));
+    }
+
+    @Test
     @DisplayName("Unit test - update price of a warehouse-medicine ")
     void updatePrice() throws Exception {
         warehouseMedicineService.updatePriceByNameId(warehouseMedicine.getId(),"10");
     }
 
     @Test
+    @DisplayName("Unit test - remove a warehouse-medicine ")
     void deleteWarehouseMedicine() throws Exception {
         warehouseMedicineService.delete(warehouseMedicine.getId());
     }

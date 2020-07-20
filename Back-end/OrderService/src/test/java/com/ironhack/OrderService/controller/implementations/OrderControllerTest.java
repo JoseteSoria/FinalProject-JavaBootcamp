@@ -1,6 +1,7 @@
 package com.ironhack.OrderService.controller.implementations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ironhack.OrderService.classes.Money;
 import com.ironhack.OrderService.model.Order;
 import com.ironhack.OrderService.service.OrderService;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,7 +43,7 @@ class OrderControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         order = new Order();
         order.setId(1l);
-        Order order2 = new Order();
+        Order order2 = new Order(new Money(new BigDecimal("8.12")));
 
         List<Order> orders = Arrays.asList(order, order2);
         when(orderService.findAll()).thenReturn(orders);

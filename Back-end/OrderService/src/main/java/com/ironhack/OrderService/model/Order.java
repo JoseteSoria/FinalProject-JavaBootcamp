@@ -1,5 +1,7 @@
 package com.ironhack.OrderService.model;
 
+import com.ironhack.OrderService.classes.Money;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -11,10 +13,22 @@ public class Order {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar date;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "total_price")),
+            @AttributeOverride(name = "currency", column = @Column(name = "currency")),
+    })
+    private Money totalPrice;
 
     public Order() {
         Calendar cal = Calendar.getInstance();
         date = cal;
+    }
+
+    public Order(Money totalPrice) {
+        Calendar cal = Calendar.getInstance();
+        date = cal;
+        this.totalPrice = totalPrice;
     }
 
     public Long getId() {
@@ -31,5 +45,13 @@ public class Order {
 
     public void setDate(Calendar date) {
         this.date = date;
+    }
+
+    public Money getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Money totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
