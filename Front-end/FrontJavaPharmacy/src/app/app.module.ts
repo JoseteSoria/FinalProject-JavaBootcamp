@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { WarehouseMedicineListComponent } from './components/warehouse-medicine-list/warehouse-medicine-list.component';
 import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
+import { MedicineOrderedListComponent } from './components/medicine-ordered-list/medicine-ordered-list.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { PatientListComponent } from './components/patient-list/patient-list.com
     MedicineListComponent,
     UserListComponent,
     WarehouseMedicineListComponent,
-    PatientListComponent
+    PatientListComponent,
+    OrderListComponent,
+    MedicineOrderedListComponent
   ],
   imports: [
     BrowserModule,

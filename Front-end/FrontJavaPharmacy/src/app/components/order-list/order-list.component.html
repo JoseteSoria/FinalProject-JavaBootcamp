@@ -1,0 +1,24 @@
+<div class="bg">
+    <h2 class="title">Orders</h2>
+    <div *ngIf="orders" class="resource-list">
+        <mat-table [dataSource]="orders" class="mat-elevation-z8">
+            <ng-container matColumnDef="orderId">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let order"> {{order.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+                <mat-cell *matCellDef="let order"> {{order.date.substring(0, 16)}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="totalPrice">
+                <mat-header-cell *matHeaderCellDef> Total Cost (EUR)</mat-header-cell>
+                <mat-cell *matCellDef="let order"> {{order.totalPrice.amount}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>
