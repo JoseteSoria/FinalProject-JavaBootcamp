@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironhack.MedicineService.classes.Money;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.dto.MedicinesToSellDTO;
 import com.ironhack.MedicineService.model.dto.MedicinesToStoreDTO;
 import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.service.WarehouseMedicineService;
@@ -42,6 +43,7 @@ class WarehouseMedicineControllerTest {
 
     private WarehouseMedicine warehouseMedicine;
     MedicinesToStoreDTO medicinesToStoreDTO;
+    MedicinesToSellDTO medicinesToSellDTO;
 
     @BeforeEach
     void setUp() {
@@ -56,11 +58,23 @@ class WarehouseMedicineControllerTest {
         WarehouseMedicineQuantityVM vm = new WarehouseMedicineQuantityVM("Ibuprofeno", 1);
         when(warehouseMedicineService.findQuantityByName("Ibuprofeno")).thenReturn(Optional.of(vm));
         when(warehouseMedicineService.findByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
-        doAnswer(i -> {return null;}).when(warehouseMedicineService).addWarehouseMedicines(warehouseMedicine.getId(),5);
+        doAnswer(i -> {
+            return null;
+        }).when(warehouseMedicineService).addWarehouseMedicines(warehouseMedicine.getId(), 5);
         medicinesToStoreDTO = new MedicinesToStoreDTO(2l, 1);
-        doAnswer(i -> {return null;}).when(warehouseMedicineService).addWarehouseMedicinesMultiple(Collections.singletonList(medicinesToStoreDTO));
-        doAnswer(i -> {return null;}).when(warehouseMedicineService).updatePriceByNameId(warehouseMedicine.getId(),"10");
-        doAnswer(i -> {return null;}).when(warehouseMedicineService).delete(warehouseMedicine.getId());
+        medicinesToSellDTO = new MedicinesToSellDTO(123l, 2, 12);
+        doAnswer(i -> {
+            return null;
+        }).when(warehouseMedicineService).addWarehouseMedicinesMultiple(Collections.singletonList(medicinesToStoreDTO));
+        doAnswer(i -> {
+            return null;
+        }).when(warehouseMedicineService).updatePriceByNameId(warehouseMedicine.getId(), "10");
+        doAnswer(i -> {
+            return null;
+        }).when(warehouseMedicineService).delete(warehouseMedicine.getId());
+        doAnswer(i -> {
+            return null;
+        }).when(warehouseMedicineService).removeWarehouseMedicinesMultiple(Collections.singletonList(medicinesToSellDTO));
     }
 
     @Test
@@ -103,6 +117,13 @@ class WarehouseMedicineControllerTest {
     @Test
     void deleteWarehouseMedicine() throws Exception {
         mockMvc.perform(delete("/warehouse-medicines/delete/1"))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void removeWarehouseMedicinesMultiple() throws Exception {
+        mockMvc.perform(delete("/warehouse-medicines/delete").content(objectMapper.writeValueAsString(Collections.singletonList(medicinesToSellDTO)))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 }

@@ -3,6 +3,7 @@ package com.ironhack.PharmacyEdge.controller.implementations;
 import com.ironhack.PharmacyEdge.controller.interfaces.ISellController;
 import com.ironhack.PharmacyEdge.model.sell.MedicineSold;
 import com.ironhack.PharmacyEdge.model.sell.Sales;
+import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 import com.ironhack.PharmacyEdge.service.SellService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,5 +63,11 @@ public class SellController implements ISellController {
     @ResponseStatus(HttpStatus.CREATED)
     public List<MedicineSold> createMedicineSold(@RequestBody @Valid List<MedicineSold> medicines){
         return sellService.storeMedicinesSold(medicines);
+    }
+
+    @PostMapping("/sales/make-sale")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void makeSale(@RequestBody @Valid List<MedicinesToSellDTO> medicinesToSellDTOS) {
+        sellService.makeSale(medicinesToSellDTOS);
     }
 }

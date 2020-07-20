@@ -3,8 +3,11 @@ package com.ironhack.PharmacyEdge.service;
 import com.ironhack.PharmacyEdge.classes.Money;
 import com.ironhack.PharmacyEdge.client.SellClient;
 import com.ironhack.PharmacyEdge.exceptions.SellServiceDownException;
+import com.ironhack.PharmacyEdge.model.medicine.Medicine;
+import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.sell.MedicineSold;
 import com.ironhack.PharmacyEdge.model.sell.Sales;
+import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,9 +32,12 @@ class SellServiceTest {
 
     @MockBean
     private SellClient sellClient;
+    @MockBean
+    private MedicineService medicineService;
 
     private Sales sales, sales2;
     private MedicineSold medicineSold, medicineSold2, medicineSold3;
+    MedicinesToSellDTO medicinesToSellDTO;
 
     @BeforeEach
     void setUp() {
@@ -57,6 +63,13 @@ class SellServiceTest {
         doAnswer(i -> {
             return null;
         }).when(sellClient).createMedicineSold(Collections.singletonList(medicineSold3));
+        medicinesToSellDTO = new MedicinesToSellDTO(123l, 2, 12);
+        WarehouseMedicine warehouseMedicine = new WarehouseMedicine("Paracetamol", 20, true, new Money(new BigDecimal("3.85")), new Money(new BigDecimal("3.95")));
+        warehouseMedicine.setId(123l);
+        when(medicineService.findWarehouseMedicineById(medicinesToSellDTO.getWarehouseMedicineId())).thenReturn(warehouseMedicine);
+        doAnswer(i -> {
+            return null;
+        }).when(medicineService).removeWarehouseMedicinesMultiple(Collections.singletonList(medicinesToSellDTO));
     }
 
     @Test
@@ -148,5 +161,13 @@ class SellServiceTest {
     @Test
     void errorCreateMedicineSold() {
         assertThrows(SellServiceDownException.class, () -> sellService.errorStoreMedicinesSold(null));
+    }
+
+    @Test
+    @DisplayName("Unit test - make a new sale. Exception occurs")
+    void makeSale() {
+        // A null pointer exception occurs in the line 128 in sell service due to order has no id
+        // It is not possible to mock due to is a new sale creation (new object)
+        assertThrows(NullPointerException.class, () -> sellService.makeSale(Collections.singletonList(medicinesToSellDTO)));
     }
 }

@@ -6,6 +6,7 @@ import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
+import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 import com.ironhack.PharmacyEdge.service.MedicineService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,7 @@ class MedicineControllerTest {
     private Medicine medicine;
     private WarehouseMedicine warehouseMedicine;
     MedicinesToStoreDTO medicinesToStoreDTO;
+    MedicinesToSellDTO medicinesToSellDTO;
 
     @BeforeEach
     void setUp() {
@@ -65,6 +67,7 @@ class MedicineControllerTest {
         when(medicineService.findQuantityByName("Ibuprofeno")).thenReturn(Optional.of(vm));
         when(medicineService.findWarehouseMedicineByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
         medicinesToStoreDTO = new MedicinesToStoreDTO(1l, 3);
+        medicinesToSellDTO = new MedicinesToSellDTO(123l, 2, 12);
         doAnswer(i -> {
             return null;
         }).when(medicineService).addWarehouseMedicines(Collections.singletonList(medicinesToStoreDTO));
@@ -74,6 +77,9 @@ class MedicineControllerTest {
         doAnswer(i -> {
             return null;
         }).when(medicineService).deleteWarehouseMedicine(warehouseMedicine.getId());
+        doAnswer(i -> {
+            return null;
+        }).when(medicineService).removeWarehouseMedicinesMultiple(Collections.singletonList(medicinesToSellDTO));
 
     }
 
@@ -135,6 +141,13 @@ class MedicineControllerTest {
     @Test
     void deleteWarehouseMedicine() throws Exception {
         mockMvc.perform(delete("/warehouse-medicines/delete/1"))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void removeWarehouseMedicinesMultiple() throws Exception {
+        mockMvc.perform(delete("/warehouse-medicines/delete").content(objectMapper.writeValueAsString(Collections.singletonList(medicinesToSellDTO)))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 

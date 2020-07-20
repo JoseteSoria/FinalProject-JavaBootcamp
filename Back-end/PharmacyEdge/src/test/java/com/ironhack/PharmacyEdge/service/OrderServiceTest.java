@@ -1,9 +1,12 @@
 package com.ironhack.PharmacyEdge.service;
 
+import com.ironhack.PharmacyEdge.classes.Money;
 import com.ironhack.PharmacyEdge.client.OrderClient;
 import com.ironhack.PharmacyEdge.exceptions.OrderServiceDownException;
+import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.order.MedicineOrdered;
 import com.ironhack.PharmacyEdge.model.order.Order;
+import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,10 +31,12 @@ class OrderServiceTest {
 
     @MockBean
     private OrderClient orderClient;
+    @MockBean
+    private MedicineService medicineService;
 
     private Order order, order2;
     private MedicineOrdered medicineOrdered, medicineOrdered2, medicineOrdered3;
-
+    MedicinesToStoreDTO medicinesToStoreDTO;
 
     @BeforeEach
     void setUp() {
@@ -56,6 +62,13 @@ class OrderServiceTest {
         doAnswer(i -> {
             return null;
         }).when(orderClient).createMedicineOrdered(Collections.singletonList(medicineOrdered3));
+        medicinesToStoreDTO = new MedicinesToStoreDTO(1l, 3);
+        Medicine medicine = new Medicine("Ibuprofeno", 18, true, new Money(new BigDecimal("3.45")));
+        medicine.setId(1l);
+        when(medicineService.findMedicineById(medicinesToStoreDTO.getMedicineId())).thenReturn(medicine);
+        doAnswer(i -> {
+            return null;
+        }).when(medicineService).addWarehouseMedicines(Collections.singletonList(medicinesToStoreDTO));
     }
 
     @Test
@@ -146,6 +159,14 @@ class OrderServiceTest {
 
     @Test
     void errorCreateMedicineOrdered() {
-        assertThrows(OrderServiceDownException.class, () -> orderService.errorCreateOrder(null));
+        assertThrows(OrderServiceDownException.class, () -> orderService.errorCreateMedicineOrdered(null));
+    }
+
+    @Test
+    @DisplayName("Unit test - place an order. Exception occurs")
+    void placeOrder() {
+        // A null pointer exception occurs in the line 127 in order service due to order has no id
+        // It is not possible to mock due to is a new order creation (new object)
+        assertThrows(NullPointerException.class, () -> orderService.placeOrder(Collections.singletonList(medicinesToStoreDTO)));
     }
 }

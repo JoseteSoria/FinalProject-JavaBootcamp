@@ -4,6 +4,7 @@ import com.ironhack.MedicineService.classes.Money;
 import com.ironhack.MedicineService.exceptions.ResourceNotFoundException;
 import com.ironhack.MedicineService.model.Medicine;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.dto.MedicinesToSellDTO;
 import com.ironhack.MedicineService.model.dto.MedicinesToStoreDTO;
 import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.repository.MedicineRepository;
@@ -87,6 +88,13 @@ public class WarehouseMedicineService {
     public void addWarehouseMedicinesMultiple(List<MedicinesToStoreDTO> medicinesToStoreDTOS) {
         for(MedicinesToStoreDTO medicinesToStoreDTO: medicinesToStoreDTOS){
             addWarehouseMedicines(medicinesToStoreDTO.getMedicineId(), medicinesToStoreDTO.getQuantity());
+        }
+    }
+
+    @Transactional
+    public void removeWarehouseMedicinesMultiple(List<MedicinesToSellDTO> medicinesToSellDTOS) {
+        for(MedicinesToSellDTO medicinesToSellDTO: medicinesToSellDTOS){
+            delete(medicinesToSellDTO.getWarehouseMedicineId());
         }
     }
 }

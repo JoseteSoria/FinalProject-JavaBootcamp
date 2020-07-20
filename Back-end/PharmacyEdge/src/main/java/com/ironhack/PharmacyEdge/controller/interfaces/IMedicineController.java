@@ -4,6 +4,7 @@ import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
+import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,4 +29,6 @@ public interface IMedicineController {
     public void updatePrice(Long id, String price);
 
     public void deleteWarehouseMedicine(Long id);
+
+    public void removeWarehouseMedicinesMultiple(List<MedicinesToSellDTO> medicinesToSellDTOS);
 }

@@ -57,7 +57,7 @@ class SellControllerTest {
 
         medicineSold = new MedicineSold(1l, "Ibuprofeno", 1l);
         medicineSold.setId(1l);
-        MedicineSold medicineSold2 = new MedicineSold(2l, "Parecetamol", 1l);
+        MedicineSold medicineSold2 = new MedicineSold(2l, "Parecetamol", new Money(new BigDecimal("2.50")),1l);
         List<MedicineSold> medicines = Arrays.asList(medicineSold, medicineSold2);
         when(sellService.findAllMedicinesSold()).thenReturn(medicines);
         when(sellService.findMedicineSoldById(medicineSold.getId())).thenReturn(medicineSold);
