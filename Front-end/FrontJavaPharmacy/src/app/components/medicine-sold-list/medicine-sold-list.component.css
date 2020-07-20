@@ -1,0 +1,12 @@
+.title {
+    margin: 1em 0 1em;
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    color: purple;
+}
+
+mat-table {
+    margin: 1em 3em;
+    width: 80%;
+    margin: 0 auto !important;
+}

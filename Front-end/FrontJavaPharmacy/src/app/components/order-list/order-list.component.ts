@@ -17,7 +17,6 @@ export class OrderListComponent implements OnInit {
     'totalPrice'
   ];
 
-
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {

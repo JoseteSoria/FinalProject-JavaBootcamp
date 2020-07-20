@@ -16,6 +16,8 @@ import { WarehouseMedicineListComponent } from './components/warehouse-medicine-
 import { PatientListComponent } from './components/patient-list/patient-list.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { MedicineOrderedListComponent } from './components/medicine-ordered-list/medicine-ordered-list.component';
+import { SalesListComponent } from './components/sales-list/sales-list.component';
+import { MedicineSoldListComponent } from './components/medicine-sold-list/medicine-sold-list.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { MedicineOrderedListComponent } from './components/medicine-ordered-list
     WarehouseMedicineListComponent,
     PatientListComponent,
     OrderListComponent,
-    MedicineOrderedListComponent
+    MedicineOrderedListComponent,
+    SalesListComponent,
+    MedicineSoldListComponent
   ],
   imports: [
     BrowserModule,
