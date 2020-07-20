@@ -4,6 +4,7 @@ import com.ironhack.OrderService.classes.Money;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "orders")
@@ -21,12 +22,12 @@ public class Order {
     private Money totalPrice;
 
     public Order() {
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         date = cal;
     }
 
     public Order(Money totalPrice) {
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         date = cal;
         this.totalPrice = totalPrice;
     }

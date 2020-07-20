@@ -2,10 +2,7 @@ package com.ironhack.SellService.model;
 
 import com.ironhack.SellService.classes.Money;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,6 +15,11 @@ public class MedicineSold {
     @NotNull(message = "Medicine name can not be null")
     private String medicineName;
     @NotNull(message = "Money can not be null")
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "amount", column = @Column(name = "price")),
+            @AttributeOverride(name = "currency", column = @Column(name = "currency")),
+    })
     private Money price;
     @NotNull(message = "Sales Id can not be null")
     private Long salesId;
