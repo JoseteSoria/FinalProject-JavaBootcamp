@@ -2,6 +2,7 @@ package com.ironhack.MedicineService.controller.implementations;
 
 import com.ironhack.MedicineService.controller.interfaces.IWarehouseMedicineController;
 import com.ironhack.MedicineService.model.WarehouseMedicine;
+import com.ironhack.MedicineService.model.dto.MedicinesToSellDTO;
 import com.ironhack.MedicineService.model.dto.MedicinesToStoreDTO;
 import com.ironhack.MedicineService.model.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.MedicineService.service.WarehouseMedicineService;
@@ -65,5 +66,11 @@ public class WarehouseMedicineController implements IWarehouseMedicineController
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWarehouseMedicine(@PathVariable(name = "id") Long id) {
         warehouseMedicineService.delete(id);
+    }
+
+    @DeleteMapping("/warehouse-medicines/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeWarehouseMedicineMultiple(@RequestBody List<MedicinesToSellDTO> medicinesToSellDTOS) {
+        warehouseMedicineService.removeWarehouseMedicinesMultiple(medicinesToSellDTOS);
     }
 }

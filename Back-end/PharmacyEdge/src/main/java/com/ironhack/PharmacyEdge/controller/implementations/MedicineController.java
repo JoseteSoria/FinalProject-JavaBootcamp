@@ -5,6 +5,7 @@ import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
+import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 import com.ironhack.PharmacyEdge.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -76,5 +77,11 @@ public class MedicineController implements IMedicineController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteWarehouseMedicine(@PathVariable(name = "id") Long id){
         medicineService.deleteWarehouseMedicine(id);
+    }
+
+    @DeleteMapping("/warehouse-medicines/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeWarehouseMedicinesMultiple(@RequestBody List<MedicinesToSellDTO> medicinesToSellDTOS){
+        medicineService.removeWarehouseMedicinesMultiple(medicinesToSellDTOS);
     }
 }

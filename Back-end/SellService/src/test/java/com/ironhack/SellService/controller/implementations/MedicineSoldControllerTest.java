@@ -1,6 +1,7 @@
 package com.ironhack.SellService.controller.implementations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ironhack.SellService.classes.Money;
 import com.ironhack.SellService.model.MedicineSold;
 import com.ironhack.SellService.service.MedicineSoldService;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +44,7 @@ class MedicineSoldControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         medicineSold = new MedicineSold(1l, "Ibuprofeno",1l);
         medicineSold.setId(1l);
-        MedicineSold medicineSold2 = new MedicineSold(2l, "Parecetamol", 1l);
+        MedicineSold medicineSold2 = new MedicineSold(2l, "Parecetamol", new Money(new BigDecimal("2.50")), 1l);
 
         List<MedicineSold> medicines = Arrays.asList(medicineSold, medicineSold2);
         when(medicineSoldService.findAll()).thenReturn(medicines);

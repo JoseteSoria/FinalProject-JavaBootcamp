@@ -7,6 +7,7 @@ import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
+import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -182,5 +183,16 @@ class MedicineServiceTest {
     @Test
     void errorDeleteWarehouseMedicine() {
         assertThrows(MedicineServiceDownException.class, () -> medicineService.errorDeleteWarehouseMedicine(null));
+    }
+
+    @Test
+    @DisplayName("Unit test - remove a warehouse-medicines from a sale. ")
+    void removeWarehouseMedicinesMultiple() throws Exception {
+        medicineService.removeWarehouseMedicinesMultiple(Collections.singletonList(new MedicinesToSellDTO(warehouseMedicine.getId(), 1, 1)));
+    }
+
+    @Test
+    void errorRemoveWarehouseMedicinesMultiple() {
+        assertThrows(MedicineServiceDownException.class, () -> medicineService.errorRemoveWarehouseMedicinesMultiple(null));
     }
 }

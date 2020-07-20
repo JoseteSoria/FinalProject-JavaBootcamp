@@ -6,11 +6,14 @@ import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
+import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -130,5 +133,16 @@ public class MedicineService {
     public Optional<List<WarehouseMedicine>> errorFindWarehouseMedicineByName(String name) {
         LOGGER.error("Controlled exception - fail in GET request to retrieve medicines by name. ");
         throw new MedicineServiceDownException(" Medicine Service Down. Method findWarehouseMedicineByName. ");
+    }
+
+    @HystrixCommand(fallbackMethod = "errorRemoveWarehouseMedicinesMultiple")
+    public void removeWarehouseMedicinesMultiple(List<MedicinesToSellDTO> medicinesToSellDTOS){
+        LOGGER.info("DELETE request to remove several medicines. ");
+        medicineClient.removeWarehouseMedicineMultiple(medicinesToSellDTOS);
+    }
+
+    public void errorRemoveWarehouseMedicinesMultiple(List<MedicinesToSellDTO> medicinesToSellDTOS){
+        LOGGER.error("Controlled exception - fail in DELETE request to remove several medicines. ");
+        throw new MedicineServiceDownException(" Medicine Service Down. Method removeWarehouseMedicineMultiple. ");
     }
 }

@@ -4,6 +4,7 @@ import com.ironhack.PharmacyEdge.model.medicine.Medicine;
 import com.ironhack.PharmacyEdge.model.medicine.WarehouseMedicine;
 import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuantityVM;
 import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
+import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,4 +42,7 @@ public interface MedicineClient {
 
     @DeleteMapping("/warehouse-medicines/delete/{id}")
     public void deleteWarehouseMedicine(@PathVariable(name = "id") Long id);
+
+    @DeleteMapping("/warehouse-medicines/delete")
+    public void removeWarehouseMedicineMultiple(@RequestBody List<MedicinesToSellDTO> medicinesToSellDTOS);
 }

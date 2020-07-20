@@ -1,5 +1,7 @@
 package com.ironhack.PharmacyEdge.model.sell;
 
+import com.ironhack.PharmacyEdge.classes.Money;
+
 import javax.validation.constraints.NotNull;
 
 public class MedicineSold {
@@ -8,6 +10,8 @@ public class MedicineSold {
     private Long medicineId;
     @NotNull(message = "Name can not be null")
     private String name;
+    @NotNull(message = "Money can not be null")
+    private Money price;
     @NotNull(message = "Sales Id can not be null")
     private Long salesId;
 
@@ -17,6 +21,13 @@ public class MedicineSold {
     public MedicineSold(Long medicineId, String name, Long salesId) {
         this.medicineId = medicineId;
         this.name = name;
+        this.salesId = salesId;
+    }
+
+    public MedicineSold(Long medicineId, String name, Money price, Long salesId) {
+        this.medicineId = medicineId;
+        this.name = name;
+        this.price = price;
         this.salesId = salesId;
     }
 
@@ -50,5 +61,13 @@ public class MedicineSold {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Money getPrice() {
+        return price;
+    }
+
+    public void setPrice(Money price) {
+        this.price = price;
     }
 }

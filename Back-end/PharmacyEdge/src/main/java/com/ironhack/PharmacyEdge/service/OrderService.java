@@ -126,6 +126,7 @@ public class OrderService {
         for(MedicineOrdered medicineOrdered : medicinesOrdered){
             medicineOrdered.setOrderId(order.getId());
         }
+        //The following two lines order is important (In sales is in the order way)
         List<MedicineOrdered> medicineOrderedList = createMedicineOrdered(medicinesOrdered);
         medicineService.addWarehouseMedicines(medicinesToStoreDTOS);
     }
