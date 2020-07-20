@@ -140,8 +140,6 @@ public class SellService {
             medicineIds.add(medicinesToSellDTO.getWarehouseMedicineId());
         }
         List<Long> newList = medicineIds.stream().distinct().collect(Collectors.toList());
-        if(newList.size()!=medicineIds.size()){
-            throw new IllegalArgumentException("There are the same medicineId more than once");
-        }
+        if(newList.size()!=medicineIds.size()) throw new IllegalArgumentException("There are the same medicineId more than once");
     }
 }

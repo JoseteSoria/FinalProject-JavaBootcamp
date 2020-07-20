@@ -3,6 +3,7 @@ package com.ironhack.PharmacyEdge.model.order;
 import com.ironhack.PharmacyEdge.classes.Money;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class Order {
     private Long id;
@@ -10,12 +11,12 @@ public class Order {
     private Money totalPrice;
 
     public Order() {
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         date = cal;
     }
 
     public Order(Money totalPrice) {
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         date = cal;
         this.totalPrice = totalPrice;
     }
