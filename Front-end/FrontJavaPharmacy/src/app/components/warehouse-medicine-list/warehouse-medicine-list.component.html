@@ -1,0 +1,34 @@
+<div class="bg">
+    <h2 class="title">Medicines</h2>
+    <div *ngIf="warehouseMedicines" class="resource-list">
+        <mat-table [dataSource]="warehouseMedicines" class="mat-elevation-z8">
+            <ng-container matColumnDef="warehouseMedicineId">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="generic">
+                <mat-header-cell *matHeaderCellDef> Generic </mat-header-cell>
+                <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.generic}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef> Price (EUR)</mat-header-cell>
+                <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.price.amount}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="expirationDate">
+                <mat-header-cell *matHeaderCellDef> Expiration Date</mat-header-cell>
+                <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.expirationDate.substring(0, 10)}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>
