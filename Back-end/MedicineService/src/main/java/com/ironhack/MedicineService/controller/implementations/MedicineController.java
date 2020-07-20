@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class MedicineController implements IMedicineController {
     @Autowired
@@ -28,7 +28,7 @@ public class MedicineController implements IMedicineController {
         return medicineService.findById(id);
     }
 
-    @GetMapping( "/medicines/name/{name}")
+    @GetMapping("/medicines/name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<Medicine> findMedicineByName(@PathVariable(name = "name") String name) {
         return medicineService.findByName(name);

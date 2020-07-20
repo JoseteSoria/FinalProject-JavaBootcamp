@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class PatientController implements IPatientController {
     @Autowired
@@ -28,7 +29,7 @@ public class PatientController implements IPatientController {
         return patientService.findById(id);
     }
 
-    @GetMapping( "/patients/name/{name}")
+    @GetMapping("/patients/name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<Patient> findPatientByName(@PathVariable(name = "name") String name) {
         return patientService.findByName(name);
@@ -36,13 +37,13 @@ public class PatientController implements IPatientController {
 
     @PostMapping("/patients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Patient create (@RequestBody @Valid Patient patient){
+    public Patient create(@RequestBody @Valid Patient patient) {
         return patientService.store(patient);
     }
 
     @DeleteMapping("/patients/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Integer id){
+    public void delete(@PathVariable Integer id) {
         patientService.delete(id);
     }
 }

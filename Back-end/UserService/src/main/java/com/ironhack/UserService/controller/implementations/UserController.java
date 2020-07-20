@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UserController implements IUserController {
     @Autowired
@@ -43,7 +44,7 @@ public class UserController implements IUserController {
         userService.delete(id);
     }
 
-    @GetMapping( "/users/username/{username}")
+    @GetMapping("/users/username/{username}")
     @ResponseStatus(HttpStatus.OK)
     public Optional<User> findByUsername(@PathVariable(name = "username") String username) {
         return userService.findByUsername(username);
