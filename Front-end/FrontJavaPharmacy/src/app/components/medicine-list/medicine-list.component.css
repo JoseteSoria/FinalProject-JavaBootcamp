@@ -1,12 +1,13 @@
 .bg { 
-height: auto;
-width: 100%;
-background-image: url("/../../../assets/img/green-background.jpg");
-background-repeat: no-repeat;
-background-size: cover;
-padding-top: 2em;
-min-height: 100%;
-text-align: center;
+    height: auto;
+    width: 100%;
+    background-image: url("/../../../assets/img/green-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 2em;
+    min-height: 100%;
+    text-align: center;
+    padding-bottom: 15px;
 }
   
 .title {

@@ -18,6 +18,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { MedicineOrderedListComponent } from './components/medicine-ordered-list/medicine-ordered-list.component';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
 import { MedicineSoldListComponent } from './components/medicine-sold-list/medicine-sold-list.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MedicineSoldListComponent } from './components/medicine-sold-list/medic
     OrderListComponent,
     MedicineOrderedListComponent,
     SalesListComponent,
-    MedicineSoldListComponent
+    MedicineSoldListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import com.ironhack.OrderService.classes.Money;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 @Entity
@@ -22,12 +23,16 @@ public class Order {
     private Money totalPrice;
 
     public Order() {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        TimeZone timeZone1 = TimeZone.getTimeZone("Europe/Madrid");
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(timeZone1);
         date = cal;
     }
 
     public Order(Money totalPrice) {
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        TimeZone timeZone1 = TimeZone.getTimeZone("Europe/Madrid");
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(timeZone1);
         date = cal;
         this.totalPrice = totalPrice;
     }
