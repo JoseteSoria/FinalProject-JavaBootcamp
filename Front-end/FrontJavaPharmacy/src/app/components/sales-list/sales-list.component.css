@@ -22,3 +22,15 @@ mat-table {
     width: 80%;
     margin: 0 auto !important;
 }
+
+.link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+    padding-bottom: 10px;
+  }
+
+.mat-purple {
+    background-color: rgb(165, 31, 165);
+    color: #fff;
+}

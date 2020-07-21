@@ -10,6 +10,7 @@ import { SalesListComponent } from './components/sales-list/sales-list.component
 import { MedicineSoldListComponent } from './components/medicine-sold-list/medicine-sold-list.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
+import { SalesFormComponent } from './components/sales-form/sales-form.component';
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'sales', component: SalesListComponent},
   { path: 'medicines-sold', component: MedicineSoldListComponent},
   { path: 'users/create', component: UserFormComponent },
-  { path: 'orders/create', component: OrderFormComponent }
+  { path: 'orders/create', component: OrderFormComponent },
+  { path: 'sales/create', component: SalesFormComponent }
 ];
 
 @NgModule({

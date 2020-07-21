@@ -25,6 +25,7 @@ import { MedicineSoldListComponent } from './components/medicine-sold-list/medic
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
+import { SalesFormComponent } from './components/sales-form/sales-form.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { OrderFormComponent } from './components/order-form/order-form.component
     MedicineSoldListComponent,
     NavbarComponent,
     UserFormComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    SalesFormComponent
   ],
   imports: [
     BrowserModule,
