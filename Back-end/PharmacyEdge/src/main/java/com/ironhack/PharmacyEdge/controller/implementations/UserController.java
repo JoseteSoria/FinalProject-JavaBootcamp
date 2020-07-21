@@ -1,6 +1,8 @@
 package com.ironhack.PharmacyEdge.controller.implementations;
 
 import com.ironhack.PharmacyEdge.controller.interfaces.IUserController;
+import com.ironhack.PharmacyEdge.enums.Role;
+import com.ironhack.PharmacyEdge.model.user.dto.LoginDTO;
 import com.ironhack.PharmacyEdge.model.user.dto.UserDTO;
 import com.ironhack.PharmacyEdge.model.user.viewModel.UserVM;
 import com.ironhack.PharmacyEdge.service.UserService;
@@ -39,6 +41,12 @@ public class UserController implements IUserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id) {
         userService.delete(id);
+    }
+
+    @PostMapping("/users/login")
+    @ResponseStatus(HttpStatus.OK)
+    public Role login(@RequestBody LoginDTO loginDTO) {
+        return userService.getByUsername(loginDTO);
     }
 
 }

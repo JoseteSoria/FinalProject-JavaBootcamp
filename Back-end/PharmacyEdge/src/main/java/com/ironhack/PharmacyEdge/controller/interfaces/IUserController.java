@@ -1,5 +1,7 @@
 package com.ironhack.PharmacyEdge.controller.interfaces;
 
+import com.ironhack.PharmacyEdge.enums.Role;
+import com.ironhack.PharmacyEdge.model.user.dto.LoginDTO;
 import com.ironhack.PharmacyEdge.model.user.dto.UserDTO;
 import com.ironhack.PharmacyEdge.model.user.viewModel.UserVM;
 import org.springframework.http.HttpStatus;
@@ -16,4 +18,6 @@ public interface IUserController {
     public UserVM create(UserDTO newUser);
 
     public void delete(Integer id);
+
+    public Role login(LoginDTO loginDTO);
 }

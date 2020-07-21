@@ -11,8 +11,10 @@ import { MedicineSoldListComponent } from './components/medicine-sold-list/medic
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
 import { SalesFormComponent } from './components/sales-form/sales-form.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent},
   { path: 'users', component: UserListComponent },
   { path: 'medicines', component: MedicineListComponent },
   { path: 'warehouse-medicines', component: WarehouseMedicineListComponent },
