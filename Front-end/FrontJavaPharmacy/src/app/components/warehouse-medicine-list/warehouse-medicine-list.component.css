@@ -1,8 +1,20 @@
+.bg { 
+    height: auto;
+    width: 100%;
+    background-image: url("/../../../assets/img/green-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 2em;
+    min-height: 100%;
+    text-align: center;
+    padding-bottom: 15px;
+}
+    
 .title {
     margin: 1em 0 1em;
     font-size: 3rem;
     letter-spacing: 0.1em;
-    color: purple;
+    color: rgb(223, 61, 223);
 }
 
 mat-table {

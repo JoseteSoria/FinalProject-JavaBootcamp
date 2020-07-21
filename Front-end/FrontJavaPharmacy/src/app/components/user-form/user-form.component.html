@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div class="bg">
+    <mat-card style="margin: 20px;">
+        <form class="example-form" [formGroup]="userForm" (ngSubmit)="submitForm()">
+            <mat-form-field appearance="fill">
+                <mat-label>name</mat-label>
+                <input matInput placeholder="name" formControlName="name" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>username</mat-label>
+                <input matInput placeholder="username" formControlName="username" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>password</mat-label>
+                <input type="password" matInput placeholder="password" formControlName="password" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Role</mat-label>
+                <mat-select placeholder="role" formControlName="role" required>
+                    <mat-option value="ROLE_OWNER">ROLE_OWNER</mat-option>
+                    <mat-option value="ROLE_ASSISTANT">ROLE_ASSISTANT</mat-option>
+                    <mat-option value="ROLE_PHARMACIST">ROLE_PHARMACIST</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <div class="submit-container">
+                <button mat-raised-button color="purple" type="submit" [disabled]="userForm.invalid">CREATE</button>
+            </div>
+        </form>
+    </mat-card>
+
+    <div class="link-container">
+        <a routerLink="/users" mat-raised-button color="primary">Back to users</a>
+    </div>
+</div>

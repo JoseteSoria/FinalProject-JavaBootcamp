@@ -8,6 +8,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { MedicineOrderedListComponent } from './components/medicine-ordered-list/medicine-ordered-list.component';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
 import { MedicineSoldListComponent } from './components/medicine-sold-list/medicine-sold-list.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'orders', component: OrderListComponent},
   { path: 'medicines-ordered', component: MedicineOrderedListComponent},
   { path: 'sales', component: SalesListComponent},
-  { path: 'medicines-sold', component: MedicineSoldListComponent}
+  { path: 'medicines-sold', component: MedicineSoldListComponent},
+  { path: 'users/create', component: UserFormComponent }
 ];
 
 @NgModule({
