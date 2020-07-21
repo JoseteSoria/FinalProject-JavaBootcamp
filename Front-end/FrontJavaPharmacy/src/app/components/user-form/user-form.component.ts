@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,6 +15,8 @@ import { User } from '../../models/user/user.model';
 export class UserFormComponent implements OnInit {
 
   user: User;
+  httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'})};
+
   userForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -23,6 +25,19 @@ export class UserFormComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.user == null){
+      this.router.navigate(['/login']);
+    }
+    else{
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: 'Basic ' + btoa( this.user.username + ':' + this.user.password)
+        })
+      };
+    }
+
     this.userForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       username: ['', [Validators.required, Validators.minLength(4)]],

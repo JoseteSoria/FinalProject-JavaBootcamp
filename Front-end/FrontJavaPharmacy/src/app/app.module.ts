@@ -27,6 +27,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { OrderFormComponent } from './components/order-form/order-form.component';
 import { SalesFormComponent } from './components/sales-form/sales-form.component';
 import { LoginComponent } from './components/login/login.component';
+import { IndexComponent } from './components/index/index.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { LoginComponent } from './components/login/login.component';
     UserFormComponent,
     OrderFormComponent,
     SalesFormComponent,
-    LoginComponent
+    LoginComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,

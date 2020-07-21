@@ -3,12 +3,9 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from 'src/app/models/user/user.model';
 
-import { Sales } from '../../models/sell/sales.model';
-import { MedicineSold } from '../../models/sell/medicineSold.model';
 import { MedicinesToSellDTO } from '../../models/sell/medicinesToSellDTO.model';
-import { mixinDisableRipple } from '@angular/material/core';
 
 @Component({
   selector: 'app-sales-form',
@@ -17,23 +14,38 @@ import { mixinDisableRipple } from '@angular/material/core';
 })
 export class SalesFormComponent implements OnInit {
 
+  user: User;
+  httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'})};
+
   salesForm: FormGroup;
   medicineToSales: MedicinesToSellDTO[];
   isShow: boolean;
   j: number;
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Basic ' + btoa('owner:owner')
-    }),
-  };
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: 'Basic ' + btoa('owner:owner')
+  //   }),
+  // };
 
   constructor(private router: Router,
               private fb: FormBuilder,
               private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.user == null){
+      this.router.navigate(['/login']);
+    }
+    else{
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: 'Basic ' + btoa( this.user.username + ':' + this.user.password)
+        })
+      };
+    }
     this.salesForm = this.fb.group({
       userId: '',
       patientId: '',
