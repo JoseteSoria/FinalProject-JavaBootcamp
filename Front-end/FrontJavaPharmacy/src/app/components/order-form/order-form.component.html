@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="bg">
+    <mat-card style="margin: 20px;">
+        <form class="example-form" [formGroup]="orderForm" (ngSubmit)="submitForm()">
+            Please check the medicines-Id in the catalogue
+            <div formArrayName="medicinesToStoreDTO" class="medicine-container">
+                <br>
+                <div *ngFor="let medicineToStoreDTO of medicinesToStoreDTOForms.controls; let i=index"
+                    [formGroupName]="i">
+                    <br>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Medicine Id</mat-label>
+                        <input matInput placeholder="medicineId" formControlName="medicineId" required>
+                    </mat-form-field>
+                    <span style="margin-right: 20px;"></span>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Quantity</mat-label>
+                        <input matInput placeholder="quantity" formControlName="quantity" required>
+                    </mat-form-field>
+                    <!-- <input formControlName="medicineId"> -->
+                    <!-- <input formControlName="quantity"> -->
+                    <span style="margin-left: 15px;">
+                        <button mat-raised-button color="warn" (click)="deleteMedicineToStoreDTO(i)">Delete</button>
+                    </span>
+                </div>
+            </div>
+            <br>
+            <div class="button-container">
+                <a mat-raised-button color="primary" (click)="addMedicineToStoreDTO()">Add Medicine to
+                    order</a>
+            </div>
+            <br>
+            <div class="submit-container">
+                <button mat-raised-button color="purple" type="submit" [disabled]="orderForm.invalid">CREATE</button>
+            </div>
+
+        </form>
+    </mat-card>
+
+    <div class="link-container">
+        <a routerLink="/orders" mat-raised-button color="primary">Back to orders</a>
+    </div>
+</div>
