@@ -1,8 +1,10 @@
 package com.ironhack.PharmacyEdge.service;
 
 import com.ironhack.PharmacyEdge.client.UserClient;
+import com.ironhack.PharmacyEdge.enums.Role;
 import com.ironhack.PharmacyEdge.exceptions.UserServiceDownException;
 import com.ironhack.PharmacyEdge.model.user.User;
+import com.ironhack.PharmacyEdge.model.user.dto.LoginDTO;
 import com.ironhack.PharmacyEdge.model.user.dto.UserDTO;
 import com.ironhack.PharmacyEdge.model.user.viewModel.UserVM;
 import com.ironhack.PharmacyEdge.security.CustomSecurityUser;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -79,8 +82,19 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDetails errorLoadUserByUsername(String username) {
-        LOGGER.error("Controlled exception - Fail in Authorization to find user (salesRep) with name " + username);
+        LOGGER.error("Controlled exception - Fail in Authorization to find user with name " + username);
         throw new UserServiceDownException("User Service Down. Method loadUserByUsername. ");
+    }
+
+    public Role getByUsername(LoginDTO loginDTO){
+        UserDetails user = loadUserByUsername(loginDTO.getUsername());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if (!encoder.matches(loginDTO.getPassword(),user.getPassword())){
+            throw new UsernameNotFoundException("Invalid username/password combination.");
+        }
+
+        return ((User) user).getRole();
     }
 
 }

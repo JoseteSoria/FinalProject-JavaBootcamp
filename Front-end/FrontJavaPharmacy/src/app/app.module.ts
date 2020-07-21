@@ -24,6 +24,9 @@ import { SalesListComponent } from './components/sales-list/sales-list.component
 import { MedicineSoldListComponent } from './components/medicine-sold-list/medicine-sold-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { OrderFormComponent } from './components/order-form/order-form.component';
+import { SalesFormComponent } from './components/sales-form/sales-form.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -38,7 +41,10 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     SalesListComponent,
     MedicineSoldListComponent,
     NavbarComponent,
-    UserFormComponent
+    UserFormComponent,
+    OrderFormComponent,
+    SalesFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

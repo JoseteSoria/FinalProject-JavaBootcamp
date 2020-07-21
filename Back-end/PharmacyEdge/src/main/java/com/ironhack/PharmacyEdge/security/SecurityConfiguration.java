@@ -71,6 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.GET, "/medicines-ordered/{id}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.GET, "/medicines-ordered/order/{id}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.POST, "/medicines-ordered").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
+                .mvcMatchers(HttpMethod.POST, "/orders/place-order").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 //Sell Controller
                 .mvcMatchers(HttpMethod.GET, "/sales").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.GET, "/sales/{id}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
@@ -80,6 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.GET, "/medicines-sold/{id}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.GET, "/medicines-sold/sales/{id}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.POST, "/medicines-sold").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
+                .mvcMatchers(HttpMethod.POST, "/sales/make-sale").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .anyRequest().permitAll()
                 .and().requestCache().requestCache(new NullRequestCache())
                 .and().logout().deleteCookies("JSESSIONID");

@@ -1,0 +1,66 @@
+.login{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: purple;
+    background-image: url("../../../assets/img/green-background.jpg");
+    background-size: cover;
+    min-height: 100%;
+}
+
+.loginCard{
+    width: 30%;
+    height: 30%;
+    margin: 20px auto !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(223, 61, 223, 0.623);
+}
+
+.login form{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login form mat-form-field{
+    width:80%;
+    color:white;
+}
+
+.login form button{
+    width: 80%;
+}
+
+.login h1{
+    color: white
+}
+
+.login form input {
+    color: white;
+  }
+
+  ::ng-deep .mat-form-field-label {
+    color: white;
+  }
+  /* Change label color on focused */
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: white;
+  }
+  /* underline border color on focused */
+  ::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple {
+    background-color: white;
+  }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: white;
+  }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: white;
+  }

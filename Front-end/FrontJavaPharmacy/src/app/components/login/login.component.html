@@ -1,0 +1,20 @@
+<section class="login">
+    <img src="../../../assets/img/Logo-JavaPharmacy.png"/>
+    <mat-card style="margin: 20px;" class="loginCard">
+        <h1>LOGIN</h1>
+        
+        <form class="loginForm" [formGroup] ="loginForm" (ngSubmit)="login()">
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Username" formControlName="username" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" formControlName="password" required type="password">
+            </mat-form-field>
+            <br>   
+            <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Submit</button>
+        </form>
+    </mat-card>
+    </section>
