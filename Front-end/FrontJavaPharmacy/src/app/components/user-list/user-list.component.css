@@ -6,7 +6,6 @@
     background-size: cover;
     padding-top: 2em;
     min-height: 100%;
-    text-align: center;
     padding-bottom: 15px;
 }
     
@@ -17,9 +16,24 @@
     color: rgb(223, 61, 223);
 }
     
-
-mat-table {
+.container {
     margin: 1em 3em;
     width: 80%;
     margin: 0 auto !important;
+}
+
+.mat-table {
+    width: 100%;
+}
+
+.link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+    padding-bottom: 5px;
+  }
+
+.mat-purple {
+    background-color: rgb(165, 31, 165);
+    color: #fff;
 }
