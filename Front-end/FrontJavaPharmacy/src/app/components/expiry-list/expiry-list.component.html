@@ -20,7 +20,7 @@
 
     <h2 class="title">Warehouse</h2>
     <div *ngIf="warehouseMedicines" class="resource-list">
-        <mat-table [dataSource]="warehouseMedicines" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="warehouseMedicineId">
                 <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
                 <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.id}} </mat-cell>
@@ -48,8 +48,8 @@
 
             <ng-container matColumnDef="delete">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let warehouseMedicine">
-                    <a mat-raised-button color="warn" class= "change-delete"><i class="fa fa-pencil-square-o"></i>
+                <mat-cell *matCellDef="let warehouseMedicine; let i=index">
+                    <a *ngIf="user != null && user.role !== 'ROLE_ASSISTANT'" (click)="deleteMedicine(warehouseMedicine, i)" mat-raised-button color="warn" class= "change-delete"><i class="fa fa-trash-o"></i>
                       <span class="tooltiptext">Delete</span></a>
                 </mat-cell>
               </ng-container>

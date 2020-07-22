@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { WarehouseMedicine } from '../../models/medicine/warehouseMedicine.model';
 import { User } from '../../models/user/user.model';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-expiry-list',
@@ -29,6 +30,7 @@ export class ExpiryListComponent implements OnInit {
     'expirationDate',
     'delete'
   ];
+  dataSource = new MatTableDataSource<WarehouseMedicine>(this.warehouseMedicines);
 
   constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
@@ -39,8 +41,6 @@ export class ExpiryListComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user == null){
       this.router.navigate(['/login']);
-    } else if (this.user.role !== 'ROLE_OWNER' && this.user.role !== 'ROLE_PHARMACIST') {
-      this.router.navigate(['/']);
     } else {
       this.httpOptions = {
         headers: new HttpHeaders({
@@ -63,10 +63,29 @@ export class ExpiryListComponent implements OnInit {
 
     this.http.get<WarehouseMedicine[]>('http://localhost:8080/warehouse-medicines/near-expiration/'
     + this.monthForm.value.month, this.httpOptions)
-    .subscribe(warehouseMedicines => this.warehouseMedicines = warehouseMedicines);
-
+    .subscribe(warehouseMedicines =>
+      {this.warehouseMedicines = warehouseMedicines;
+       this.dataSource = new MatTableDataSource<WarehouseMedicine>(this.warehouseMedicines); });
     console.log(this.warehouseMedicines);
     this.router.navigate(['/warehouse-medicines/check-expiry']);
+  }
+
+  deleteMedicine(med: WarehouseMedicine, i: number){
+    console.log(med.id);
+    console.log(i);
+    console.log(this.warehouseMedicines);
+    this.warehouseMedicines.splice(i, 1);
+    this.dataSource = new MatTableDataSource<WarehouseMedicine>(this.warehouseMedicines);
+    this.dataSource._updateChangeSubscription();
+    this.http.delete('http://localhost:8080/warehouse-medicines/delete/' + med.id, this.httpOptions).subscribe(
+      (data) => {
+      },
+      (error) => {
+        this.snackBar.open('Something went wrong!', 'X', {
+          duration: 2000,
+        });
+      }
+    );
   }
 
 }
