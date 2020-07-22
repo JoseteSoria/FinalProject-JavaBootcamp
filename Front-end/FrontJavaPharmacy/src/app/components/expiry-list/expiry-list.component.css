@@ -1,0 +1,57 @@
+.mat-card {
+    margin: 0.5em;
+    margin: 0 auto !important;
+    width: 30%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-container {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-container button {
+    width: 30%;
+}
+
+.link-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+    font-size: 0.9em;
+}
+
+.mat-raised-button {
+    font-size: 0.9rem;
+}
+
+.mat-purple {
+    background-color: rgb(165, 31, 165);
+    color: #fff;
+}
+
+
+.mat-yellow {
+    background-color: #ffda00;
+    color: #fff;
+}
+
+.no-medicines{
+    margin: 0, auto;
+    text-align: center;
+    font-size: 2em;
+}
+
+.bg {
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    background-image: url("../../../assets/img/green-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 1.2em;
+}

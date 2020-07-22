@@ -55,9 +55,25 @@ mat-table {
     opacity: 1;
   }
 
-  a { text-decoration: none; color:purple; }
-  a:visited { text-decoration: none; color:purple; }
-  a:hover { text-decoration: none; color:purple; }
-  a:focus { text-decoration: none; color:purple; }
-  a:hover, a:active { text-decoration: none; color:purple }
+  .change-price { text-decoration: none; color:purple; }
+  .change-price:visited { text-decoration: none; color:purple; }
+  .change-price:hover { text-decoration: none; color:purple; }
+  .change-price:focus { text-decoration: none; color:purple; }
+  .change-price:hover, .change-price:active { text-decoration: none; color:purple }
   
+
+.link-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  padding-bottom: 10px;
+}
+
+.mat-purple {
+    background-color: rgb(165, 31, 165);
+    color: #fff;
+}
+.mat-purple:hover {
+  background-color: rgb(165, 31, 165);
+  color: #fff;
+}

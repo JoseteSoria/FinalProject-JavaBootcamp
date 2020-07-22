@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    console.log(JSON.parse(localStorage.getItem('currentUser')));
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user != null) {
       this.router.navigate(['/']);

@@ -30,6 +30,7 @@ import { LoginComponent } from './components/login/login.component';
 import { IndexComponent } from './components/index/index.component';
 import { PatientFormComponent } from './components/patient-form/patient-form.component';
 import { UpdatePriceComponent } from './components/update-price/update-price.component';
+import { ExpiryListComponent } from './components/expiry-list/expiry-list.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { UpdatePriceComponent } from './components/update-price/update-price.com
     LoginComponent,
     IndexComponent,
     PatientFormComponent,
-    UpdatePriceComponent
+    UpdatePriceComponent,
+    ExpiryListComponent
   ],
   imports: [
     BrowserModule,
