@@ -18,15 +18,24 @@
                 <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.generic}} </mat-cell>
             </ng-container>
 
+            <ng-container matColumnDef="expirationDate">
+                <mat-header-cell *matHeaderCellDef> Expiration Date</mat-header-cell>
+                <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.expirationDate.substring(0, 10)}} </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="price">
                 <mat-header-cell *matHeaderCellDef> Price (EUR)</mat-header-cell>
                 <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.price.amount}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="expirationDate">
-                <mat-header-cell *matHeaderCellDef> Expiration Date</mat-header-cell>
-                <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.expirationDate.substring(0, 10)}} </mat-cell>
-            </ng-container>
+            <ng-container matColumnDef="change">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let warehouseMedicine">
+                    <a *ngIf="user != null && user.role == 'ROLE_OWNER'" class= "change-price" routerLink="/warehouse-medicines/{{warehouseMedicine.id}}/update-price"><i class="fa fa-pencil-square-o"></i>
+                      <span class="tooltiptext">Change-Price - {{warehouseMedicine.name}}</span></a>
+                </mat-cell>
+              </ng-container>
+
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

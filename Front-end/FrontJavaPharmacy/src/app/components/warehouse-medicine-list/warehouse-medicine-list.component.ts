@@ -20,7 +20,8 @@ export class WarehouseMedicineListComponent implements OnInit {
     'name',
     'generic',
     'price',
-    'expirationDate'
+    'expirationDate',
+    'change'
   ];
 
   constructor(private router: Router, private http: HttpClient) { }

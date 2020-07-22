@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Order } from '../../models/order/order.model';
 import { MedicineOrdered } from '../../models/order/medicineOrdered.model';
-import { MedicinesToStoreDTO } from '../../models/order/medicinesToStoreDTO.model'
+import { MedicinesToStoreDTO } from '../../models/order/medicinesToStoreDTO.model';
 import { User } from 'src/app/models/user/user.model';
 
 @Component({

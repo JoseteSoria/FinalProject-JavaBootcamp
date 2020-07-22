@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +21,7 @@ public interface WarehouseMedicineRepository extends JpaRepository<WarehouseMedi
 
     @Query(value = "UPDATE warehouse_medicine as wh, (SELECT id FROM warehouse_medicine WHERE name = :name ) AS wh2 SET wh.price = :newPrice WHERE wh.id=wh2.id", nativeQuery = true)
     void updatePriceByName(@Param("name") String name, @Param("newPrice") String newPrice);
+
+    @Query(value = "SELECT * FROM warehouse_medicine WHERE expiration_date < :date ", nativeQuery = true)
+    Optional<List<WarehouseMedicine>> findMedicinesCloseToExpirationDate(@Param("date")Calendar date);
 }

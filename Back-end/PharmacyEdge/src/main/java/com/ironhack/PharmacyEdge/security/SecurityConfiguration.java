@@ -59,6 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.GET, "/warehouse-medicines/{id}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.GET, "/warehouse-medicines/name/{name}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.GET, "/warehouse-medicines/name/{name}/quantity").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
+                .mvcMatchers(HttpMethod.GET, "/warehouse-medicines/near-expiration/{months}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.PUT, "/warehouse-medicines/{id}/update-price/{price}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.POST, "/warehouse-medicines/{id}/add/{quantity}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.DELETE, "/warehouse-medicines/delete/{id}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")

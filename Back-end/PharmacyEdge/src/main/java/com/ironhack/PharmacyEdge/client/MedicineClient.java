@@ -6,6 +6,7 @@ import com.ironhack.PharmacyEdge.model.medicine.viewModel.WarehouseMedicineQuant
 import com.ironhack.PharmacyEdge.model.order.dto.MedicinesToStoreDTO;
 import com.ironhack.PharmacyEdge.model.sell.dto.MedicinesToSellDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,9 @@ public interface MedicineClient {
 
     @GetMapping("/warehouse-medicines/name/{name}")
     public Optional<List<WarehouseMedicine>> findWarehouseMedicineByName(@PathVariable(name = "name") String name);
+
+    @GetMapping("/warehouse-medicines/near-expiration/{months}")
+    public Optional<List<WarehouseMedicine>> findMedicinesCloseToExpirationDate(@PathVariable(name = "months") Integer months);
 
     @PostMapping("/warehouse-medicines/add")
     public void addWarehouseMedicines(@RequestBody List<MedicinesToStoreDTO> medicinesToStoreDTOS);

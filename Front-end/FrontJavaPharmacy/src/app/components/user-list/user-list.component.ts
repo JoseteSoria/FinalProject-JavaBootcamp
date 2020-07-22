@@ -27,8 +27,11 @@ export class UserListComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user == null){
       this.router.navigate(['/login']);
+    } else if (this.user.role !== 'ROLE_OWNER') {
+      this.router.navigate(['/']);
     }
     else{
+      console.log(this.user);
       this.httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',

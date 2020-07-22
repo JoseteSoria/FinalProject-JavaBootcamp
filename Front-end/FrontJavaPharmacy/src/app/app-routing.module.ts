@@ -13,6 +13,8 @@ import { OrderFormComponent } from './components/order-form/order-form.component
 import { SalesFormComponent } from './components/sales-form/sales-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { IndexComponent } from './components/index/index.component';
+import { PatientFormComponent } from './components/patient-form/patient-form.component';
+import { UpdatePriceComponent } from './components/update-price/update-price.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent},
@@ -26,8 +28,10 @@ const routes: Routes = [
   { path: 'sales', component: SalesListComponent},
   { path: 'medicines-sold', component: MedicineSoldListComponent},
   { path: 'users/create', component: UserFormComponent },
+  { path: 'patients/create', component: PatientFormComponent },
   { path: 'orders/create', component: OrderFormComponent },
-  { path: 'sales/create', component: SalesFormComponent }
+  { path: 'sales/create', component: SalesFormComponent },
+  { path: 'warehouse-medicines/:id/update-price', component: UpdatePriceComponent }
 ];
 
 @NgModule({

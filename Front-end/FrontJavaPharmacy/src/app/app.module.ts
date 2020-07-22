@@ -28,6 +28,8 @@ import { OrderFormComponent } from './components/order-form/order-form.component
 import { SalesFormComponent } from './components/sales-form/sales-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { IndexComponent } from './components/index/index.component';
+import { PatientFormComponent } from './components/patient-form/patient-form.component';
+import { UpdatePriceComponent } from './components/update-price/update-price.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { IndexComponent } from './components/index/index.component';
     OrderFormComponent,
     SalesFormComponent,
     LoginComponent,
-    IndexComponent
+    IndexComponent,
+    PatientFormComponent,
+    UpdatePriceComponent
   ],
   imports: [
     BrowserModule,

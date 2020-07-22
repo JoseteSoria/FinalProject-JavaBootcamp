@@ -20,7 +20,8 @@ public class PatientController implements IPatientController {
     @GetMapping("/patients")
     @ResponseStatus(HttpStatus.OK)
     public List<Patient> findAll() {
-        return patientService.findAll();
+        List<Patient> patients = patientService.findAll();
+        return patients;
     }
 
     @GetMapping("/patients/{id}")
