@@ -83,6 +83,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.GET, "/medicines-sold/sales/{id}").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.POST, "/medicines-sold").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
                 .mvcMatchers(HttpMethod.POST, "/sales/make-sale").hasAnyAuthority("ROLE_OWNER", "ROLE_ASSISTANT", "ROLE_PHARMACIST")
+                //Report Controller
+                .mvcMatchers(HttpMethod.GET, "/reports/sales-users/{months}").hasAnyAuthority("ROLE_OWNER")
+                .mvcMatchers(HttpMethod.GET, "/reports/purchases-patients/{months}").hasAnyAuthority("ROLE_OWNER")
+                .mvcMatchers(HttpMethod.GET, "/reports/medicines-sold/{months}/{ranking}").hasAnyAuthority("ROLE_OWNER")
+                .mvcMatchers(HttpMethod.GET, "/reports/medicines-revenue/{months}/{ranking}").hasAnyAuthority("ROLE_OWNER")
                 .anyRequest().permitAll()
                 .and().requestCache().requestCache(new NullRequestCache())
                 .and().logout().deleteCookies("JSESSIONID");
