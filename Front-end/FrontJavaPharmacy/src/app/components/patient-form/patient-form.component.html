@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div class="bg">
+    <mat-card style="margin: 20px;">
+        <form class="example-form" [formGroup]="patientForm" (ngSubmit)="submitForm()">
+            <mat-form-field appearance="fill">
+                <mat-label>name</mat-label>
+                <input matInput placeholder="name" formControlName="name" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Birthday</mat-label>
+                <input matInput placeholder="Ex. 1996-10-03" formControlName="birthday" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Phone Number</mat-label>
+                <input matInput placeholder="phoneNumber" formControlName="phoneNumber" required>
+            </mat-form-field>
+            <br>
+            <div class="submit-container">
+                <button mat-raised-button color="purple" type="submit" [disabled]="patientForm.invalid">ADD</button>
+            </div>
+        </form>
+    </mat-card>
+
+    <div class="link-container">
+        <a routerLink="/patients" mat-raised-button color="primary">Back to patients</a>
+    </div>
+</div>

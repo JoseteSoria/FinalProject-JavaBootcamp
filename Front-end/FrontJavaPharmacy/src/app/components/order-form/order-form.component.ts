@@ -7,7 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Order } from '../../models/order/order.model';
 import { MedicineOrdered } from '../../models/order/medicineOrdered.model';
-import { MedicinesToStoreDTO } from '../../models/order/medicinesToStoreDTO.model'
+import { MedicinesToStoreDTO } from '../../models/order/medicinesToStoreDTO.model';
+import { User } from 'src/app/models/user/user.model';
 
 @Component({
   selector: 'app-order-form',
@@ -16,6 +17,8 @@ import { MedicinesToStoreDTO } from '../../models/order/medicinesToStoreDTO.mode
 })
 export class OrderFormComponent implements OnInit {
 
+  user: User;
+  httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'})};
 
   orderForm: FormGroup;
   order: Order;
@@ -23,12 +26,12 @@ export class OrderFormComponent implements OnInit {
   medicineId: number;
   quantity: number;
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Basic ' + btoa('owner:owner')
-    }),
-  };
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: 'Basic ' + btoa('owner:owner')
+  //   }),
+  // };
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -36,6 +39,18 @@ export class OrderFormComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.user == null){
+      this.router.navigate(['/login']);
+    }
+    else{
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: 'Basic ' + btoa( this.user.username + ':' + this.user.password)
+        })
+      };
+    }
     this.orderForm = this.fb.group({
       medicinesToStoreDTO: this.fb.array([])
     });

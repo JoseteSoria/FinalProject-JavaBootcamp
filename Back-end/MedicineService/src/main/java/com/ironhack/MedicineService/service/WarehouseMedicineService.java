@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,5 +97,15 @@ public class WarehouseMedicineService {
         for(MedicinesToSellDTO medicinesToSellDTO: medicinesToSellDTOS){
             delete(medicinesToSellDTO.getWarehouseMedicineId());
         }
+    }
+
+    public Optional<List<WarehouseMedicine>> findMedicinesCloseToExpirationDate(Integer months){
+        Calendar cal = Calendar.getInstance();
+        if(months < 12) cal.add(Calendar.MONTH, months);
+        else {
+            cal.add(Calendar.YEAR, months/12);
+            cal.add(Calendar.MONTH, months%12);
+        }
+        return warehouseMedicineRepository.findMedicinesCloseToExpirationDate(cal);
     }
 }

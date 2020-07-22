@@ -3,7 +3,7 @@
     <h2 class="title">Sales</h2>
     <div class="link-container">
         <a routerLink="/sales/create" mat-raised-button color="purple">Make a new sales </a>
-        <a routerLink="/medicines-sold" mat-raised-button color="primary">Show all medcines sales </a>
+        <a routerLink="/medicines-sold" mat-raised-button color="primary">Show all medicines sold </a>
     </div>
     <div *ngIf="sales" class="resource-list">
         <mat-table [dataSource]="sales" class="mat-elevation-z8">

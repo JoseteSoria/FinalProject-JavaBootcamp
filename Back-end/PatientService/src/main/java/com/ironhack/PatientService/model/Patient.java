@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 @Entity
 public class Patient {
@@ -24,6 +25,8 @@ public class Patient {
 
     public Patient(String name, Calendar birthday, String phoneNumber) {
         this.name = name;
+        TimeZone timeZone1 = TimeZone.getTimeZone("UTC");
+        birthday.setTimeZone(timeZone1);
         this.birthday = birthday;
         setPhoneNumber(phoneNumber);
     }

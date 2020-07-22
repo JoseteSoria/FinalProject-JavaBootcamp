@@ -58,6 +58,7 @@ class WarehouseMedicineControllerTest {
         WarehouseMedicineQuantityVM vm = new WarehouseMedicineQuantityVM("Ibuprofeno", 1);
         when(warehouseMedicineService.findQuantityByName("Ibuprofeno")).thenReturn(Optional.of(vm));
         when(warehouseMedicineService.findByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
+        when(warehouseMedicineService.findMedicinesCloseToExpirationDate(6)).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
         doAnswer(i -> {
             return null;
         }).when(warehouseMedicineService).addWarehouseMedicines(warehouseMedicine.getId(), 5);
@@ -102,6 +103,12 @@ class WarehouseMedicineControllerTest {
     }
 
     @Test
+    void findMedicinesCloseToExpirationDate() throws Exception {
+        mockMvc.perform(get("/warehouse-medicines/near-expiration/6"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void addQuantity() throws Exception {
         mockMvc.perform(post("/warehouse-medicines/add").content(objectMapper.writeValueAsString(Collections.singletonList(medicinesToStoreDTO)))
                 .contentType(MediaType.APPLICATION_JSON))
@@ -111,6 +118,12 @@ class WarehouseMedicineControllerTest {
     @Test
     void updatePrice() throws Exception {
         mockMvc.perform(put("/warehouse-medicines/1/update-price/10"))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void updatePrice_BelowMinimum() throws Exception {
+        mockMvc.perform(put("/warehouse-medicines/1/update-price/1"))
                 .andExpect(status().isNoContent());
     }
 

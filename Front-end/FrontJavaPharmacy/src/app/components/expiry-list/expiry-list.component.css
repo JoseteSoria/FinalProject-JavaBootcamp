@@ -1,0 +1,112 @@
+.mat-card {
+    margin: 0.5em;
+    margin: 0 auto !important;
+    width: 30%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-container {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-container button {
+    width: 30%;
+}
+
+.link-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+    font-size: 0.9em;
+}
+
+.mat-raised-button {
+    font-size: 0.9rem;
+}
+
+.mat-purple {
+    background-color: rgb(165, 31, 165);
+    color: #fff;
+}
+
+
+.mat-yellow {
+    background-color: #ffda00;
+    color: #fff;
+}
+
+.no-medicines{
+    margin: 0, auto;
+    text-align: center;
+    font-size: 2em;
+}
+
+.bg {
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    background-image: url("../../../assets/img/green-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 1.2em;
+}
+
+mat-table {
+    margin: 1em 3em;
+    width: 90%;
+    margin: 0 auto !important;
+}
+
+.mat-column-warehouseMedicineId{
+    max-width: 8em;
+}
+
+.mat-column-delete {
+    max-width: 8em;
+    font-size: small;
+  }
+  
+  a .tooltiptext {
+    visibility: hidden;
+    width: 70px;
+    height: 30px;
+    background-color: rgb(206, 206, 206);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: x-small;
+    padding: 2px;
+    padding-top: 0px;
+    border-radius: 2px;
+    /* Fade in tooltip */
+    position: absolute;
+    margin-top: -10px;
+    margin-left: -20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  a:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+.link-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  padding-bottom: 10px;
+}
+
+.mat-purple {
+    background-color: rgb(165, 31, 165);
+    color: #fff;
+}
+.mat-purple:hover {
+  background-color: rgb(165, 31, 165);
+  color: #fff;
+}

@@ -19,6 +19,61 @@
 
 mat-table {
     margin: 1em 3em;
-    width: 80%;
+    width: 85%;
     margin: 0 auto !important;
+}
+
+.mat-column-change {
+    max-width: 0.5em;
+    margin-right: 40px;
+    font-size: small;
+  }
+  
+  .change-price a:hover {
+    font-size: 0.7rem;
+  }
+  
+  a .tooltiptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: rgb(206, 206, 206);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: xx-small;
+    padding: 5px;
+    border-radius: 6px;
+    /* Fade in tooltip */
+    position: absolute;
+    margin-top: -30px;
+    margin-left: -20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  a:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .change-price { text-decoration: none; color:purple; }
+  .change-price:visited { text-decoration: none; color:purple; }
+  .change-price:hover { text-decoration: none; color:purple; }
+  .change-price:focus { text-decoration: none; color:purple; }
+  .change-price:hover, .change-price:active { text-decoration: none; color:purple }
+  
+
+.link-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  padding-bottom: 10px;
+}
+
+.mat-purple {
+    background-color: rgb(165, 31, 165);
+    color: #fff;
+}
+.mat-purple:hover {
+  background-color: rgb(165, 31, 165);
+  color: #fff;
 }

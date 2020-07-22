@@ -62,6 +62,12 @@ public class MedicineController implements IMedicineController {
         return medicineService.findWarehouseMedicineByName(name);
     }
 
+    @GetMapping("/warehouse-medicines/near-expiration/{months}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<List<WarehouseMedicine>> findMedicinesCloseToExpirationDate(@PathVariable(name = "months") Integer months) {
+        return medicineService.findMedicinesCloseToExpirationDate(months);
+    }
+
     @PostMapping("/warehouse-medicines/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void addWarehouseMedicines(@RequestBody List<MedicinesToStoreDTO> medicinesToStoreDTOS){

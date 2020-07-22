@@ -28,8 +28,11 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 class WarehouseMedicineServiceTest {
@@ -70,6 +73,7 @@ class WarehouseMedicineServiceTest {
         Medicine medicine2 = new Medicine("Paracetamol", 20, true, new Money(new BigDecimal("3.85")));
         when(medicineRepository.findById(2l)).thenReturn(Optional.of(medicine2));
         when(warehouseMedicineRepository.findAllMedicinesByName("Ibuprofeno")).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
+        when(warehouseMedicineRepository.findMedicinesCloseToExpirationDate(any())).thenReturn(Optional.of(Collections.singletonList(warehouseMedicine)));
         doAnswer(i -> {
             return null;
         }).when(warehouseMedicineRepository).save(warehouseMedicine);
@@ -107,6 +111,18 @@ class WarehouseMedicineServiceTest {
     }
 
     @Test
+    @DisplayName("Unit test - retrieval warehouse-medicines close to expiration")
+    void findMedicinesCloseToExpirationDate() {
+        assertEquals("Ibuprofeno", warehouseMedicineService.findMedicinesCloseToExpirationDate(6).get().get(0).getName());
+    }
+
+    @Test
+    @DisplayName("Unit test - retrieval warehouse-medicines close to expiration. More than one year")
+    void findMedicinesCloseToExpirationDate_MoreThan12Moths() {
+        assertEquals("Ibuprofeno", warehouseMedicineService.findMedicinesCloseToExpirationDate(14).get().get(0).getName());
+    }
+
+    @Test
     @DisplayName("Unit test - retrieval of a warehouse-medicine quantity by name")
     void findQuantityByName() {
         assertEquals("Ibuprofeno", warehouseMedicineService.findQuantityByName("Ibuprofeno").get().getName());
@@ -125,13 +141,19 @@ class WarehouseMedicineServiceTest {
     }
 
     @Test
-    @DisplayName("Unit test - update price of a warehouse-medicine ")
+    @DisplayName("Unit test - update price of a warehouse-medicine. ")
     void updatePrice() throws Exception {
         warehouseMedicineService.updatePriceByNameId(warehouseMedicine.getId(),"10");
     }
 
     @Test
-    @DisplayName("Unit test - remove a warehouse-medicine ")
+    @DisplayName("Unit test - update price of a warehouse-medicine but price below minimum. ")
+    void updatePrice_BelowMinimum() throws Exception {
+        warehouseMedicineService.updatePriceByNameId(warehouseMedicine.getId(),"1");
+    }
+
+    @Test
+    @DisplayName("Unit test - remove a warehouse-medicine. ")
     void deleteWarehouseMedicine() throws Exception {
         warehouseMedicineService.delete(warehouseMedicine.getId());
     }

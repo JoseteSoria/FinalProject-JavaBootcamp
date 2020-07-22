@@ -5,7 +5,7 @@
         <!-- Links -->
         <ul class="list">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/users" >USERS</a>
+                <a class="nav-link" *ngIf="user != null && user.role == 'ROLE_OWNER'"  routerLink="/users" >USERS</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/warehouse-medicines">MY MEDICINES</a>
@@ -20,7 +20,10 @@
                 <a class="nav-link" routerLink="/medicines">CATALOGUE</a>
             </li>
             <li class="nav-item">
-                <button id="logoutBtn">LOGOUT</button>
+                <a class="nav-link" routerLink="/patients">PATIENTS</a>
+            </li>
+            <li class="nav-item">
+                <button id="logoutBtn" (click) = "logout()">LOGOUT</button>
             </li>
         </ul>
     </nav>

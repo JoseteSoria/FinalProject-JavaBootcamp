@@ -1,11 +1,26 @@
 <app-navbar></app-navbar>
 <div class="bg">
-    <h2 class="title">Warehouse</h2>
     <div class="link-container">
-        <a routerLink="/warehouse-medicines/check-expiry" mat-raised-button color="purple">Check expiry dates </a>
+        <a routerLink="/warehouse-medicines" mat-raised-button color="yellow">Back to My Medicines</a>
     </div>
+    <mat-card style="margin: 20px;">
+        <form class="example-form" [formGroup]="monthForm" (ngSubmit)="submitForm()">
+            <mat-form-field appearance="fill">
+                <mat-label>Months</mat-label>
+                <input matInput placeholder="Number of months" formControlName="month" required>
+            </mat-form-field>
+            <br>
+            <div class="submit-container">
+                <button mat-raised-button color="purple" type="submit" [disabled]="monthForm.invalid">Apply</button>
+            </div>
+        </form>
+    </mat-card>
+
+
+
+    <h2 class="title">Warehouse</h2>
     <div *ngIf="warehouseMedicines" class="resource-list">
-        <mat-table [dataSource]="warehouseMedicines" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="warehouseMedicineId">
                 <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
                 <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.id}} </mat-cell>
@@ -31,11 +46,11 @@
                 <mat-cell *matCellDef="let warehouseMedicine"> {{warehouseMedicine.price.amount}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="change">
+            <ng-container matColumnDef="delete">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let warehouseMedicine">
-                    <a *ngIf="user != null && user.role == 'ROLE_OWNER'" class= "change-price" routerLink="/warehouse-medicines/{{warehouseMedicine.id}}/update-price"><i class="fa fa-pencil-square-o"></i>
-                      <span class="tooltiptext">Change-Price - {{warehouseMedicine.name}}</span></a>
+                <mat-cell *matCellDef="let warehouseMedicine; let i=index">
+                    <a *ngIf="user != null && user.role !== 'ROLE_ASSISTANT'" (click)="deleteMedicine(warehouseMedicine, i)" mat-raised-button color="warn" class= "change-delete"><i class="fa fa-trash-o"></i>
+                      <span class="tooltiptext">Delete</span></a>
                 </mat-cell>
               </ng-container>
 
@@ -44,4 +59,7 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
     </div>
+
+    <div *ngIf="!warehouseMedicines" class="no-medicines"> There is no medicines expiring so early</div>
+
 </div>

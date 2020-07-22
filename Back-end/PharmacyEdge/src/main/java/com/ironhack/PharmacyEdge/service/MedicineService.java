@@ -126,13 +126,24 @@ public class MedicineService {
 
     @HystrixCommand(fallbackMethod = "errorFindWarehouseMedicineByName")
     public Optional<List<WarehouseMedicine>> findWarehouseMedicineByName(String name) {
-        LOGGER.info("POST request to retrieve medicines by name. ");
+        LOGGER.info("GET request to retrieve medicines by name. ");
         return medicineClient.findWarehouseMedicineByName(name);
     }
 
     public Optional<List<WarehouseMedicine>> errorFindWarehouseMedicineByName(String name) {
         LOGGER.error("Controlled exception - fail in GET request to retrieve medicines by name. ");
         throw new MedicineServiceDownException(" Medicine Service Down. Method findWarehouseMedicineByName. ");
+    }
+
+    @HystrixCommand(fallbackMethod = "errorFindMedicinesCloseToExpirationDate")
+    public Optional<List<WarehouseMedicine>> findMedicinesCloseToExpirationDate(Integer months) {
+        LOGGER.info("GET request to retrieve warehouse-medicines with less than " + months + " months to expiration date");
+        return medicineClient.findMedicinesCloseToExpirationDate(months);
+    }
+
+    public Optional<List<WarehouseMedicine>> errorFindMedicinesCloseToExpirationDate(Integer months) {
+        LOGGER.error("Controlled exception - fail in GET request to retrieve warehouse-medicines close to expiration. ");
+        throw new MedicineServiceDownException(" Medicine Service Down. Method findMedicinesCloseToExpirationDate. ");
     }
 
     @HystrixCommand(fallbackMethod = "errorRemoveWarehouseMedicinesMultiple")
@@ -145,4 +156,5 @@ public class MedicineService {
         LOGGER.error("Controlled exception - fail in DELETE request to remove several medicines. ");
         throw new MedicineServiceDownException(" Medicine Service Down. Method removeWarehouseMedicineMultiple. ");
     }
+
 }

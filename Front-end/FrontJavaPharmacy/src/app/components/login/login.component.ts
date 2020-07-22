@@ -25,9 +25,10 @@ export class LoginComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    console.log(JSON.parse(localStorage.getItem('currentUser')));
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user != null) {
-      this.router.navigate(['/medicines']);
+      this.router.navigate(['/']);
     } else {
       this.loginForm = this.formBuilder.group({
         username: ['', [Validators.required, Validators.minLength(4)]],
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.user = {id: null, name: null, username: this.loginForm.value.username, password: this.loginForm.value.password, role: data };
 
           localStorage.setItem('currentUser', JSON.stringify(this.user));
-          this.router.navigate(['/medicines']);
+          this.router.navigate(['/']);
         },
         (error) => {
           this.snackBar.open('Something went wrong!', 'X', {

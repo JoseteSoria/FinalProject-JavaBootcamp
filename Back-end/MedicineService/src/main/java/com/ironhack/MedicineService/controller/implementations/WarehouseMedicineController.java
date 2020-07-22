@@ -43,12 +43,11 @@ public class WarehouseMedicineController implements IWarehouseMedicineController
         return warehouseMedicineService.findByName(name);
     }
 
-//    Deprecated
-//    @PostMapping("/warehouse-medicines/{id}/add/{quantity}")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void addWarehouseMedicineOnce(@PathVariable(name = "id") Long id, @PathVariable(name = "quantity") Integer quantity) {
-//        warehouseMedicineService.addWarehouseMedicines(id, quantity);
-//    }
+    @GetMapping("/warehouse-medicines/near-expiration/{months}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<List<WarehouseMedicine>> findMedicinesCloseToExpirationDate(@PathVariable(name = "months") Integer months) {
+        return warehouseMedicineService.findMedicinesCloseToExpirationDate(months);
+    }
 
     @PostMapping("/warehouse-medicines/add")
     @ResponseStatus(HttpStatus.CREATED)
