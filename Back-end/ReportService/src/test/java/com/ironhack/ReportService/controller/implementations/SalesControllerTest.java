@@ -1,7 +1,6 @@
 package com.ironhack.ReportService.controller.implementations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ironhack.ReportService.service.MedicineSoldService;
 import com.ironhack.ReportService.service.SalesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,19 +28,19 @@ class SalesControllerTest {
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        when(salesService.findPurchasesByPatientInMonthsPeriod(1)).thenReturn(null);
         when(salesService.findSalesByUserInMonthsPeriod(1)).thenReturn(null);
+        when(salesService.findPurchasesByPatientInMonthsPeriod(1)).thenReturn(null);
     }
 
     @Test
-    void findMoreMedicineSoldPeriodRanking() throws Exception {
-        this.mockMvc.perform(get("/reports/medicines-sold/1/1"))
+    void findSalesByUserInMonthsPeriod() throws Exception {
+        this.mockMvc.perform(get("/reports/sales-users/1"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void findMoreMedicineRevenuePeriodRanking() throws Exception {
-        this.mockMvc.perform(get("/reports/medicines-revenue/1/1"))
+    void findPurchasesByPatientInMonthsPeriod() throws Exception {
+        this.mockMvc.perform(get("/reports/purchases-patients/1"))
                 .andExpect(status().isOk());
     }
 

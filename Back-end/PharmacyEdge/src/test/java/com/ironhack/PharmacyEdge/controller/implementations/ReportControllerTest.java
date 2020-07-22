@@ -1,7 +1,7 @@
-package com.ironhack.ReportService.controller.implementations;
+package com.ironhack.PharmacyEdge.controller.implementations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ironhack.ReportService.service.MedicineSoldService;
+import com.ironhack.PharmacyEdge.service.ReportService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +16,34 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-class MedicineSoldControllerTest {
+class ReportControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @MockBean
-    private MedicineSoldService medicineSoldService;
+    private ReportService reportService;
 
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-        when(medicineSoldService.findMoreMedicineSoldPeriodRanking(1, 1)).thenReturn(null);
-        when(medicineSoldService.findMoreMedicineRevenuePeriodRanking(1, 1)).thenReturn(null);
+        when(reportService.findPurchasesByPatientInMonthsPeriod(1)).thenReturn(null);
+        when(reportService.findSalesByUserInMonthsPeriod(1)).thenReturn(null);
+        when(reportService.findMoreMedicineSoldPeriodRanking(1, 1)).thenReturn(null);
+        when(reportService.findMoreMedicineRevenuePeriodRanking(1, 1)).thenReturn(null);
+    }
+
+    @Test
+    void findSalesByUserInMonthsPeriod() throws Exception {
+        this.mockMvc.perform(get("/reports/sales-users/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void findPurchasesByPatientInMonthsPeriod() throws Exception {
+        this.mockMvc.perform(get("/reports/purchases-patients/1"))
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -43,5 +57,4 @@ class MedicineSoldControllerTest {
         this.mockMvc.perform(get("/reports/medicines-revenue/1/1"))
                 .andExpect(status().isOk());
     }
-
 }

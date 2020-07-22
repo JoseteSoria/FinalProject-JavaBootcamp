@@ -27,12 +27,12 @@ class SalesServiceTest {
 
     @Test
     void findSalesByUserInMonthsPeriod() {
-        salesService.findPurchasesByPatientInMonthsPeriod(1);
+        salesService.findSalesByUserInMonthsPeriod(1);
     }
 
     @Test
     void findSalesByUserInMonthsPeriod_MoreThan12Months() {
-        salesService.findPurchasesByPatientInMonthsPeriod(14);
+        salesService.findSalesByUserInMonthsPeriod(14);
     }
 
     @Test
