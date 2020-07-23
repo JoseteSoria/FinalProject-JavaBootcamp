@@ -5,6 +5,7 @@ import com.ironhack.PharmacyEdge.client.UserClient;
 import com.ironhack.PharmacyEdge.enums.Role;
 import com.ironhack.PharmacyEdge.exceptions.UserServiceDownException;
 import com.ironhack.PharmacyEdge.model.user.User;
+import com.ironhack.PharmacyEdge.model.user.dto.LoginDTO;
 import com.ironhack.PharmacyEdge.model.user.dto.UserDTO;
 import com.ironhack.PharmacyEdge.model.user.viewModel.UserVM;
 import org.junit.jupiter.api.BeforeEach;
@@ -115,4 +116,9 @@ class UserServiceTest {
         assertThrows(UserServiceDownException.class, () -> userService.errorLoadUserByUsername("aappaco"));
     }
 
+    @Test
+    void getByUsername() throws Exception {
+        LoginDTO loginDTO = new LoginDTO("owner", "owner");
+        assertEquals(ROLE_OWNER, userService.getByUsername(loginDTO));
+    }
 }

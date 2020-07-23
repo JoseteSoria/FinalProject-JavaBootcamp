@@ -1,53 +1,61 @@
 package com.ironhack.UserService.controller.implementations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ironhack.UserService.enums.Role;
 import com.ironhack.UserService.model.User;
 import com.ironhack.UserService.model.dto.UserDTO;
-import com.ironhack.UserService.repository.UserRepository;
-import org.junit.jupiter.api.AfterEach;
+import com.ironhack.UserService.model.viewModel.UserVM;
+import com.ironhack.UserService.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.ironhack.UserService.enums.Role.ROLE_ASSISTANT;
+import static com.ironhack.UserService.enums.Role.ROLE_OWNER;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 class UserControllerTest {
-    @Autowired
-    private UserRepository userRepository;
+    @MockBean
+    private UserService userService;
 
     @Autowired
-    private WebApplicationContext wac;
+    private WebApplicationContext webApplicationContext;
 
     private MockMvc mockMvc;
     private ObjectMapper objectMapper = new ObjectMapper();
-    private User user;
+    private UserVM user;
+    private UserDTO userDTO;
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-        user = new User( "Groucho Marx", "groucho","1234", Role.ROLE_OWNER);
-        User user1 = new User("Harpo Marx","harpo","1234", Role.ROLE_ASSISTANT);
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        user = new UserVM(1, "OWNER", "owner", ROLE_OWNER);
+        UserVM user2 = new UserVM(1, "ASSISTANT1", "assistant1", ROLE_ASSISTANT);
 
-        userRepository.saveAll(Stream.of(user, user1).collect(Collectors.toList()));
-    }
-
-    @AfterEach
-    void tearDown() {
-        userRepository.deleteAll();
+        List<UserVM> users = Arrays.asList(user, user2);
+        when(userService.getAll()).thenReturn(users);
+        when(userService.getById(user.getId())).thenReturn(user);
+        User realUser = new User("OWNER", "owner", "$2a$10$4ezwkorIoW.TIwCj2XmKXOAUwpF5G8DZNQyKRWe77AoZlEfWfaK22", ROLE_OWNER);
+        userDTO = new UserDTO("ASSISTANT1", "assistant1", "assistant1", ROLE_ASSISTANT);
+        when(userService.store(userDTO)).thenReturn(user2);
+        doAnswer(i -> {
+            return null;
+        }).when(userService).delete(user.getId());
     }
 
     @Test
@@ -61,37 +69,22 @@ class UserControllerTest {
     void getById() throws Exception {
         MvcResult result = mockMvc.perform(get("/users/" + user.getId()))
                 .andExpect(status().isOk()).andReturn();
-        assertTrue(result.getResponse().getContentAsString().contains("Groucho"));
-    }
-
-    @Test
-    @DisplayName("Test get request when user with id doesn't exist, expected 404 status code")
-    void getById_WrongId() throws Exception {
-        mockMvc.perform(get("/users/0")).andExpect(status().isNotFound());
+        assertTrue(result.getResponse().getContentAsString().contains("OWNER"));
     }
 
     @Test
     @DisplayName("Test post request to create new user, expected 201 status code")
     void create() throws Exception {
-        UserDTO userDTO = new UserDTO("Chico Marx", "chico", "1234", Role.ROLE_PHARMACIST);
         MvcResult result = mockMvc.perform(post("/users")
                 .content(objectMapper.writeValueAsString(userDTO))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated()).andReturn();
-
-        assertTrue(result.getResponse().getContentAsString().contains("Chico"));
     }
 
     @Test
     @DisplayName("Test delete request to remove user, expected 204 status code")
     void deleteUserById() throws Exception {
         mockMvc.perform(delete("/users/" + user.getId())).andExpect(status().isNoContent());
-    }
-
-    @Test
-    @DisplayName("Test delete request to remove non-existing user, expected 404 status code")
-    void deleteUserById_WrongId() throws Exception {
-        mockMvc.perform(delete("/users/0")).andExpect(status().isNotFound());
     }
 
     @Test
