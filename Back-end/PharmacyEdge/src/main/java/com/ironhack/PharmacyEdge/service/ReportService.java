@@ -31,7 +31,7 @@ public class ReportService {
     @HystrixCommand(fallbackMethod = "errorFindPurchasesByPatientInMonthsPeriod")
     public List<Object[]> findPurchasesByPatientInMonthsPeriod(Integer months) {
         LOGGER.info("GET request to retrieve purchases by patient in last " + months + " months");
-        return reportClient.findSalesByUserInMonthsPeriod(months);
+        return reportClient.findPurchasesByPatientInMonthsPeriod(months);
     }
 
     public List<Object[]> errorFindPurchasesByPatientInMonthsPeriod(Integer months) {
@@ -43,7 +43,7 @@ public class ReportService {
     public List<Object[]> findMoreMedicineSoldPeriodRanking(Integer months, Integer ranking) {
         LOGGER.info("GET request to retrieve the " + ranking + " best sold medicines" +
                 "in the last " + months + " months");
-        return reportClient.findSalesByUserInMonthsPeriod(months);
+        return reportClient.findMoreMedicineSoldPeriodRanking(months, ranking);
     }
 
     public List<Object[]> errorFindMoreMedicineSoldPeriodRanking(Integer months, Integer ranking) {
@@ -55,7 +55,7 @@ public class ReportService {
     public List<Object[]> findMoreMedicineRevenuePeriodRanking(Integer months, Integer ranking) {
         LOGGER.info("GET request to retrieve the " + ranking + " best medicines in income aspects" +
                 "in the last " + months + " months");
-        return reportClient.findSalesByUserInMonthsPeriod(months);
+        return reportClient.findMoreMedicineRevenuePeriodRanking(months, ranking);
     }
 
     public List<Object[]> errorFindMoreMedicineRevenuePeriodRanking(Integer months, Integer ranking) {

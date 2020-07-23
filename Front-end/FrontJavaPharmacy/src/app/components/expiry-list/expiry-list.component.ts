@@ -70,7 +70,7 @@ export class ExpiryListComponent implements OnInit {
     this.router.navigate(['/warehouse-medicines/check-expiry']);
   }
 
-  deleteMedicine(med: WarehouseMedicine, i: number){
+  deleteMedicine(med: WarehouseMedicine, i: number): void {
     console.log(med.id);
     console.log(i);
     console.log(this.warehouseMedicines);

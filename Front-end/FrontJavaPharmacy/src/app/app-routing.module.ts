@@ -16,6 +16,7 @@ import { IndexComponent } from './components/index/index.component';
 import { PatientFormComponent } from './components/patient-form/patient-form.component';
 import { UpdatePriceComponent } from './components/update-price/update-price.component';
 import { ExpiryListComponent } from './components/expiry-list/expiry-list.component';
+import { ReportComponent } from './components/report/report.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent},
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'orders/create', component: OrderFormComponent },
   { path: 'sales/create', component: SalesFormComponent },
   { path: 'warehouse-medicines/check-expiry', component: ExpiryListComponent },
-  { path: 'warehouse-medicines/:id/update-price', component: UpdatePriceComponent }
+  { path: 'warehouse-medicines/:id/update-price', component: UpdatePriceComponent },
+  { path: 'report', component: ReportComponent }
 ];
 
 @NgModule({

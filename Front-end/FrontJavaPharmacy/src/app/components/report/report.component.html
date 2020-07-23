@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+
+<div class="bg">
+    <div id="box-transaction">
+        <div id="box">
+            <ul>
+                <li *ngFor="let transaction of transcations" (click)="drawChart1(transaction.value, transaction.viewValue)"
+                    [(value)]="routeTransaction" [ngClass]="{selected: routeTransaction === transaction.value}">
+                    {{transaction.viewValue}}</li>
+                <li>
+                <li>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Period</mat-label>
+                        <mat-select (selectionChange)="onChange1()" [(value)]="periodTransaction" name="months">
+                            <mat-option *ngFor="let month of months" [value]="month.value">
+                                {{month.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </li>
+            </ul>
+        </div>
+
+        <div id="box-right">
+            <div class="box-chart resource" *ngIf="chartOption1">
+                <div echarts [options]="chartOption1" class="chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="box-besties">
+        <div id="box">
+            <ul>
+                <li *ngFor="let bestMedicine of bestMedicines" (click)="drawChart2(bestMedicine.value, bestMedicine.viewValue)"
+                    [(value)]="routeBestie" [ngClass]="{selected: routeBestie === bestMedicine.value}">
+                    {{bestMedicine.viewValue}}</li>
+                <li>
+                <li>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Range</mat-label>
+                        <mat-select (selectionChange)="onChange2()" [(value)]="periodBesties" name="months">
+                            <mat-option *ngFor="let month of months" [value]="month.value">
+                                {{month.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Ranking</mat-label>
+                        <mat-select (selectionChange)="onChange2()" [(value)]="ranking" name="ranking">
+                            <mat-option *ngFor="let top of tops" [value]="top.value">
+                                {{top.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </li>
+            </ul>
+        </div>
+
+        <div id="box-right">
+            <div class="box-chart resource" *ngIf="chartOption2">
+                <div echarts [options]="chartOption2" class="chart"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

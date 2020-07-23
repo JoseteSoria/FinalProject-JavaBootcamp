@@ -1,0 +1,67 @@
+.bg {
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    background-image: url("../../../assets/img/green-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 2em;
+}
+
+.chart {
+    height: 400px;
+}
+
+ #box-transaction {
+    display: flex;
+    height: 60%;
+    margin: 1em 2em 0 0;
+}
+
+#box-besties {
+    display: flex;
+    height: 40%;
+    margin: 1em 2em 0 0;
+}
+
+#box{
+    width: 20%;
+}
+
+.mat-form-field {
+    width:90px !important;
+    height: 50px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.mat-select{
+    width:70px !important;
+    font-size: 10px !important;
+} 
+
+ul {
+    margin: 0 15px;
+    padding: 0;
+    width: 80%;
+    background-color: #f1f1f1;
+    border-radius:  0.5em;
+}
+
+li {
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 1em;
+    width: 100%;
+    display: block;
+    color: #000;
+    padding: 6px 0 0px 16px;
+}
+ 
+  #box-right {
+    width: 80%;
+    margin: 10px;
+  }
+
+  
+  
