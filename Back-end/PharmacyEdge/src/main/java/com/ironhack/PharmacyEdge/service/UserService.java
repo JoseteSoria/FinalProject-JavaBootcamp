@@ -28,6 +28,10 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserClient userClient;
 
+    /**
+     * This method gets all user from UserRepository
+     * @return a User's list (List)
+     */
     @HystrixCommand(fallbackMethod = "errorGetAll")
     public List<UserVM> getAll() {
         LOGGER.info("GET request to retrieve every user");
@@ -39,6 +43,11 @@ public class UserService implements UserDetailsService {
         throw new UserServiceDownException("User Service Down. Method getAll. ");
     }
 
+    /**
+     * This method gets a user by a given id UserRepository
+     * @param id an integer value
+     * @return a User
+     */
     @HystrixCommand(fallbackMethod = "errorGetById")
     public UserVM getById(Integer id) {
         LOGGER.info("GET request to retrieve user with id " + id);
@@ -50,6 +59,11 @@ public class UserService implements UserDetailsService {
         throw new UserServiceDownException("User Service Down. Method getById. ");
     }
 
+    /**
+     * This method create a new User
+     * @param newUser an UserDTO object
+     * @return a User view model (UserVM)
+     */
     @HystrixCommand(fallbackMethod = "errorCreate", ignoreExceptions = {RuntimeException.class})
     public UserVM create(UserDTO newUser) {
         LOGGER.info("POST request to create a new user");
@@ -61,6 +75,10 @@ public class UserService implements UserDetailsService {
         throw new UserServiceDownException("User Service Down. Method create. ");
     }
 
+    /**
+     * This method delete a user by a given id
+     * @param id an integer value
+     */
     @HystrixCommand(fallbackMethod = "errorDelete")
     public void delete(Integer id) {
         LOGGER.info("DELETE request to remove user with id " + id);
@@ -72,6 +90,11 @@ public class UserService implements UserDetailsService {
         throw new UserServiceDownException("User Service Down. Method delete. ");
     }
 
+    /**
+     * This method retrieve a user by a given its username
+     * @param username a string value
+     * @return UserDetail object
+     */
     @Override
     @HystrixCommand(fallbackMethod = "errorLoadUserByUsername")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -85,6 +108,7 @@ public class UserService implements UserDetailsService {
         LOGGER.error("Controlled exception - Fail in Authorization to find user with name " + username);
         throw new UserServiceDownException("User Service Down. Method loadUserByUsername. ");
     }
+
 
     public Role getByUsername(LoginDTO loginDTO){
         UserDetails user = loadUserByUsername(loginDTO.getUsername());

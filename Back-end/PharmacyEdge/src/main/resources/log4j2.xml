@@ -4,6 +4,9 @@
         <Console name="Console" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{${sys:PID}}{magenta} [%15.15t] %style{%-40.40C{1.}}{cyan} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
         </Console>
+        <NoSql name="databaseAppender">
+            <MongoDb databaseName="javapharmacy_logs" collectionName="pharmacy_edge" server="127.0.0.1" port="27017"/>
+        </NoSql>
         <File name="MyFile" fileName="./logs/app.log">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
@@ -15,8 +18,31 @@
     </Appenders>
     <Loggers>
         <Root level="info">
-            <AppenderRef ref="Async"/>
             <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="com.ironhack.PharmacyEdge.service.MedicineService" level="info">
+            <AppenderRef ref="Async"/>
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
+        <Logger name="com.ironhack.PharmacyEdge.service.OrderService" level="info">
+            <AppenderRef ref="Async"/>
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
+        <Logger name="com.ironhack.PharmacyEdge.service.PatientService" level="info">
+            <AppenderRef ref="Async"/>
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
+        <Logger name="com.ironhack.PharmacyEdge.service.ReportService" level="info">
+            <AppenderRef ref="Async"/>
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
+        <Logger name="com.ironhack.PharmacyEdge.service.SellService" level="info">
+            <AppenderRef ref="Async"/>
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
+        <Logger name="com.ironhack.PharmacyEdge.service.UserService" level="info">
+            <AppenderRef ref="Async"/>
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
     </Loggers>
 </Configuration>

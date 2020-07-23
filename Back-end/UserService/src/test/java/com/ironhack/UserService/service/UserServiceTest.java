@@ -1,6 +1,8 @@
 package com.ironhack.UserService.service;
 
 import com.ironhack.UserService.enums.Role;
+import com.ironhack.UserService.exceptions.IllegalInputException;
+import com.ironhack.UserService.exceptions.ResourceNotFoundException;
 import com.ironhack.UserService.model.User;
 import com.ironhack.UserService.model.dto.UserDTO;
 import com.ironhack.UserService.model.viewModel.UserVM;
@@ -16,7 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -32,9 +35,9 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        user = new User( "Groucho Marx", "groucho","1234", Role.ROLE_OWNER);
+        user = new User("Groucho Marx", "groucho", "1234", Role.ROLE_OWNER);
         user.setId(1);
-        User user2 = new User("Harpo Marx","harpo","1234", Role.ROLE_ASSISTANT);
+        User user2 = new User("Harpo Marx", "harpo", "1234", Role.ROLE_ASSISTANT);
         User user3 = new User("Chico Marx", "chico", "1234", Role.ROLE_PHARMACIST);
 
         List<User> userList = Arrays.asList(user, user2);
@@ -60,6 +63,12 @@ class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Unit test - retrieval of a user with specific id. Wrong Id")
+    void getById_IdNotFound() {
+        assertThrows(ResourceNotFoundException.class, () -> userService.getById(null).getUsername());
+    }
+
+    @Test
     @DisplayName("Unit test - create new user")
     void create() {
         UserDTO userDTO = new UserDTO("Chico Marx", "chico", "1234", Role.ROLE_PHARMACIST);
@@ -68,10 +77,23 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Unit test - delete new user")
+    @DisplayName("Unit test - create new user but Username already in use")
+    void create_CaughtUsername() {
+        UserDTO userDTO = new UserDTO("Chico Marx", "groucho", "1234", Role.ROLE_PHARMACIST);
+        assertThrows(IllegalInputException.class, () -> userService.store(userDTO));
+    }
+
+    @Test
+    @DisplayName("Unit test - delete a user")
     void delete() {
         userService.delete(1);
         verify(userRepository, times(1)).deleteById(user.getId());
+    }
+
+    @Test
+    @DisplayName("Unit test - delete a user but not found")
+    void delete_UserNotFound() {
+        assertThrows(ResourceNotFoundException.class, ()-> userService.delete(null));
     }
 
     @Test
