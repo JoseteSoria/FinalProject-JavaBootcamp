@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+
+<div class="bg">
+    <div id="box-content">
+        <div id="box">
+            <ul>
+                <li *ngFor="let transaction of transcations" (click)="drawChart(transaction.value, transaction.viewValue)"
+                    [(value)]="routeTransaction" [ngClass]="{selected: routeTransaction === transaction.value}">
+                    {{transaction.viewValue}}</li>
+                <li>
+                <li>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Range</mat-label>
+                        <mat-select (selectionChange)="onChange()" [(value)]="period" name="months">
+                            <mat-option *ngFor="let month of months" [value]="month.value">
+                                {{month.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </li>
+            </ul>
+        </div>
+
+
+        <div id="box-right">
+            <div class="box-chart resource" *ngIf="chartOption">
+                <div echarts [options]="chartOption" class="chart"></div>
+            </div>
+        </div>
+    </div>
+</div>

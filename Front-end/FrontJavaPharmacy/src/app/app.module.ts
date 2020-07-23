@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,6 +33,7 @@ import { IndexComponent } from './components/index/index.component';
 import { PatientFormComponent } from './components/patient-form/patient-form.component';
 import { UpdatePriceComponent } from './components/update-price/update-price.component';
 import { ExpiryListComponent } from './components/expiry-list/expiry-list.component';
+import { ReportComponent } from './components/report/report.component';
 
 
 @NgModule({
@@ -52,14 +55,19 @@ import { ExpiryListComponent } from './components/expiry-list/expiry-list.compon
     IndexComponent,
     PatientFormComponent,
     UpdatePriceComponent,
-    ExpiryListComponent
+    ExpiryListComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
+    NgxEchartsModule.forRoot({
+      echarts,
+    }),
     MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
