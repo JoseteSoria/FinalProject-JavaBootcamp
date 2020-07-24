@@ -23,7 +23,8 @@ This project has been developed using a microservices architecture. There are si
 In the following image you can see which are the different microservices
 
 ![MicroserviceArchitecture](MicroserviceArchitecture.png)
-*All the microservices have exception handling, log reporting and a coverage test above 80%.
+
+*All the microservices have validations, exception handling, log reporting and a coverage test above 80%.
 
 ### Tools
 
