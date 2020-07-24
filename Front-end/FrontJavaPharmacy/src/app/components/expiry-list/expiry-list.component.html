@@ -5,6 +5,7 @@
     </div>
     <mat-card style="margin: 20px;">
         <form class="example-form" [formGroup]="monthForm" (ngSubmit)="submitForm()">
+            Time (months) to expiry date
             <mat-form-field appearance="fill">
                 <mat-label>Months</mat-label>
                 <input matInput placeholder="Number of months" formControlName="month" required>

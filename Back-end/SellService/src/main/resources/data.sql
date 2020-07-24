@@ -1,6 +1,6 @@
 insert into sales (id, patient_id, user_id, total_price, currency, date) values
-(1, 1, 2, 5.60, 'EUR', '2020-07-23 08:12:25'),
-(2, 3, 2, 7.02, 'EUR', '2020-07-24 12:24:07'),
+(1, 1, 2, 5.60, 'EUR', '2020-04-23 08:12:25'),
+(2, 3, 2, 7.02, 'EUR', '2020-06-24 12:24:07'),
 (3, 3, 1, 7.65, 'EUR', '2020-07-24 13:03:41');
 
 insert into medicine_sold (id, medicine_id, medicine_name, price, currency, sales_id) values
