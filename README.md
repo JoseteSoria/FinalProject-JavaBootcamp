@@ -123,13 +123,13 @@ Here you have to enter with the user credentials.
 
 Remember you should have at least an owner,   with it password. (If all the steps have gone correctly you should been able to enter with username: *owner*, password: *owner*).
 
-![LoginPhoto](LoginPhoto.png)
+![LoginPhoto](LoginPhoto.PNg)
 
 After going throug login screen you will get into the app per se.
 
 There you will been able to surf through the main navbar:
 
-![NavbarPhoto](NavbarPhoto.png)
+![NavbarPhoto](NavbarPhoto.PNG)
 
 Rememeber that what you can see and do in the app depend on the user role!!
 
