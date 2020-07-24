@@ -12,6 +12,12 @@
     height: 400px;
 }
 
+.selected {
+    background-color: #ffda00;
+    color: rgb(165, 31, 165);
+    font-weight: bold;
+  }
+
  #box-transaction {
     display: flex;
     height: 60%;
@@ -62,6 +68,3 @@ li {
     width: 80%;
     margin: 10px;
   }
-
-  
-  
