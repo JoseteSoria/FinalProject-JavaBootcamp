@@ -123,7 +123,7 @@ Here you have to enter with the user credentials.
 
 Remember you should have at least an owner,   with it password. (If all the steps have gone correctly you should been able to enter with username: *owner*, password: *owner*).
 
-![LoginPhoto](LoginPhoto.PNg)
+![LoginPhoto](LoginPhoto.PNG)
 
 After going throug login screen you will get into the app per se.
 
