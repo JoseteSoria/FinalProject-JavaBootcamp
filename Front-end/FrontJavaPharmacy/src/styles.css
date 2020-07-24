@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  /* GLOBAL STYLES */
+  .title {
+    text-align: center;
+    color: black;
+    text-shadow: 0.03em 0.03em 0 black, -0.03em 0em 0 #ffda00, 0em -0.03em 0 #ffda00,
+      0.06em 0.06em 0 #000;
+    text-transform: uppercase;
+  }
+  
+  .link-container a {
+    font-size: 1.2em;
+    margin-right: 1em;
+  }
+  
+  .link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+  }
+  
+  .fa-chart-bar {
+    margin-left: 0.5em;
+  }
+  
+  .resource-list,
+  .resource {
+    padding-bottom: 1em;
+    animation: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    80% {
+      opacity: 1;
+    }
+  }
+  

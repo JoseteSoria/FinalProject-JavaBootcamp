@@ -1,0 +1,64 @@
+.toolbar {
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(165, 31, 165);
+    color: #ffda00;
+    font-weight: 600;
+    height: 10vh;
+}
+
+.toolbar img {
+    margin: 0px 10px;
+    margin-top: 7px;
+    height: 9vh;
+}
+
+.navbar{
+    width: 60%;
+    float: right;
+}
+.list{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.toolbar a{
+    color:#ffda00;
+    text-decoration: none;
+    padding: 0.8rem;
+}
+
+.navbar a:hover{
+    color:rgb(165, 31, 165);
+    text-decoration: none;
+    background-color: #ffda00;
+    border-radius: 5px;
+    padding: 0.8rem;
+}
+
+#logoutBtn{
+    color:rgb(165, 31, 165);
+    border: 1px solid #ffda00;
+    border-radius: 5px;
+    padding: 12px;
+    background-color: #ffda00;
+    margin-top: 0;
+}
+
+#logoutBtn:hover{
+    background-color: orangered;
+    border: 1px solid orangered;
+    padding: 12px;
+    color: white;
+}

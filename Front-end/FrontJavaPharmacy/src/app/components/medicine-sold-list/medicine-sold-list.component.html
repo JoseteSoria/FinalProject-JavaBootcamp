@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="bg">
+    <h2 class="title">Medicines Sold</h2>
+    <div *ngIf="medicinesSold" class="resource-list">
+        <mat-table [dataSource]="medicinesSold" class="mat-elevation-z8">
+            <ng-container matColumnDef="medicineSoldId">
+                <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                <mat-cell *matCellDef="let medicineSold"> {{medicineSold.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="medicineId">
+                <mat-header-cell *matHeaderCellDef> medicine-Id</mat-header-cell>
+                <mat-cell *matCellDef="let medicineSold"> {{medicineSold.medicineId}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="medicineName">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let medicineSold"> {{medicineSold.medicineName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef> Price (EUR) </mat-header-cell>
+                <mat-cell *matCellDef="let medicineSold"> {{medicineSold.price.amount}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="salesId">
+                <mat-header-cell *matHeaderCellDef> Sales-Id </mat-header-cell>
+                <mat-cell *matCellDef="let medicineSold"> {{medicineSold.salesId}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+</div>

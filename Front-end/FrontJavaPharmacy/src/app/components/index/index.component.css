@@ -1,0 +1,22 @@
+.bg { 
+    height: auto;
+    width: 100%;
+    background-image: url("../../../assets/img/green-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+h1 { 
+  color: rgba(223, 61, 223);
+  font-weight: bolder;
+  font-size: 3rem;
+  text-shadow: 0.03em 0.03em 0 black, -0.03em 0em 0 #ffda00, 0em -0.03em 0 #ffda00,
+  0.06em 0.06em 0 #000;
+    font-size: 3rem;
+    text-transform: uppercase;
+}

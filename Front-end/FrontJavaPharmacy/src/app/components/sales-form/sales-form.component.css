@@ -1,0 +1,61 @@
+.mat-card {
+    margin: 3em;
+    margin: 0 auto !important;
+    width: 70%;
+}
+    
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.userpatient-container {
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.medicine-container {
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+    
+.submit-container {
+    display: flex;
+    justify-content: center;
+}
+    
+.submit-container button {
+    width: 30%;
+}
+    
+.link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+    font-size: 1.5em;
+}
+    
+.mat-raised-button {
+    font-size: 1rem;
+}
+    
+.mat-purple {
+    background-color: rgb(165, 31, 165);
+    color: #fff;
+}
+    
+.bg {
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    background-image: url("../../../assets/img/green-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 2em;
+}
+    
