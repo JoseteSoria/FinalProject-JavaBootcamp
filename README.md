@@ -121,13 +121,13 @@ Once you have been able to run the project you will face with the login screen.
 
 Here you have to enter with the user credentials.
 
-Remember you should have at least an owner,   with it password. (If all the steps have gone correctly you should been able to enter with username: *owner*, password: *owner*).
+Remember you should have at least an owner,   with it password. (If all the steps have gone correctly you should been able to enter with username: *owner*, password: *owner*). 
 
-![LoginPhoto](LoginPhoto.PNG)
+<img align="center" src="LoginPhoto.PNG" alt="drawing" width="300"/>
 
-After going throug login screen you will get into the app per se.
+After going through login screen you will get into the app per se.
 
-There you will been able to surf through the main navbar:
+There, you will been able to surf through the main navbar:
 
 ![NavbarPhoto](NavbarPhoto.PNG)
 
