@@ -115,6 +115,8 @@ You can use the deployed application visiting [https://javapharmacy.web.app/](ht
 
 *In addition, and **only** if you do not find the reason if it is not working, you could check that the database deployed have inputs (sometimes are removed due to mantenaince fixes). For this purpose you should visit [https://www.db4free.net/phpMyAdmin/index.php](https://www.db4free.net/phpMyAdmin/index.php) and enter with User: *javapharmacyuser* and password: *javapharmacypassword*
 
+You alsa can visit the [Eureka Dashboard](https://eureka-server-javapharmacy.herokuapp.com) in order to see which microservices are already registered.
+
 If you would like to test the routes in the deployed microservices you can do it going to the postman documentation and in the replacing the *http://localhost:{port}* for the microservice deployed base route (You can find them in the postman documentation)
 
 Once you have been able to run the project you will face with the login screen.
